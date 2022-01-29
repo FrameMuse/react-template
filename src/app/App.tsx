@@ -1,8 +1,6 @@
-// Implement plugins configs
-import "plugins-config"
+import Localization from "modules/localization/controller"
+import useLocalization from "modules/localization/hook"
 
-import Localization from "plugins/localization/controller"
-import useLocalization from "plugins/localization/hook"
 
 function App() {
   const ll = useLocalization(ll => ll)
@@ -14,5 +12,6 @@ function App() {
     </>
   )
 }
+
 
 export default App

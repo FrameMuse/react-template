@@ -16,7 +16,7 @@ copies or substantial portions of the Software.
 
 */
 
-import { LocalizationJSONRaw } from "."
+import { LocalizationJSONRaw } from "./config"
 
 /**
  * Loop in object deeply and make it accessible with variables of types: string | number
@@ -83,3 +83,4 @@ export function Localize<Selected extends Record<string, unknown> = Localization
 }
 
 export default Localization
+require("./config")
