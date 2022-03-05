@@ -19,43 +19,43 @@ copies or substantial portions of the Software.
 import { Component } from "react"
 import { classWithModifiers } from "utils/common"
 
-import { PopupContext } from "./context"
-import { PopupPrivate } from "./controller"
-import { PopupWindow } from "./interfaces"
+import { modalContext } from "./context"
+import { ModalPrivate } from "./controller"
+import { ModalWindow } from "./interfaces"
 
-export interface PopupContainerProps {
+export interface ModalContainerProps {
   className?: string
 }
-export interface PopupContainerState {
+export interface ModalContainerState {
   isActive: boolean
-  queue: PopupWindow[]
+  queue: ModalWindow[]
 }
 
-export class PopupContainer extends Component<PopupContainerProps, PopupContainerState> {
-  state: PopupContainerState = {
+export class ModalContainer extends Component<ModalContainerProps, ModalContainerState> {
+  state: ModalContainerState = {
     isActive: false,
     queue: []
   }
 
   constructor(props: any) {
     super(props)
-    // Set Popup dispatcher
-    PopupPrivate.dispatch = this.setState.bind(this)
+    // Set Modal dispatcher
+    ModalPrivate.dispatch = this.setState.bind(this)
   }
 
   render() {
     const { isActive, queue } = this.state
-    const lastPopup = queue[queue.length - 1] as PopupWindow<{}> | undefined
-    const { component: PopupWindowComponent, params = {}, close } = lastPopup || {}
+    const lastModal = queue[queue.length - 1] as ModalWindow<{}> | undefined
+    const { component: ModalWindowComponent, params = {}, close } = lastModal || {}
 
-    const className = this.props.className || "popup"
+    const className = this.props.className || "modal"
     return (
       <div className={classWithModifiers(className, isActive && "active")}>
         <div className={className + "__container"} onClick={close}>
           <div className={className + "__inner"} onClick={event => event.stopPropagation()}>
-            <PopupContext.Provider value={lastPopup || null}>
-              {PopupWindowComponent && <PopupWindowComponent {...params} />}
-            </PopupContext.Provider>
+            <modalContext.Provider value={lastModal || null}>
+              {ModalWindowComponent && <ModalWindowComponent {...params} />}
+            </modalContext.Provider>
           </div>
         </div>
       </div>

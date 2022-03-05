@@ -2,7 +2,7 @@ import "app/assets/scss/base.scss"
 import "app/assets/scss/app.scss"
 
 import ClientAPI from "api/client"
-import { PopupContainer } from "modules/popup/container"
+import { ModalContainer } from "modules/modal/container"
 import { Suspense } from "react"
 import { ClientContextProvider } from "react-fetching-library"
 import { Provider } from "react-redux"
@@ -21,7 +21,7 @@ function App() {
           <Suspense fallback="Loading...">
             <ErrorBoundary fallback="Error">
               <AppRouter />
-              <PopupContainer />
+              <ModalContainer />
               <ToastContainer />
             </ErrorBoundary>
           </Suspense>
