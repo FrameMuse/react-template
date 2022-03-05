@@ -13,9 +13,10 @@ Includes:
 - `lodash`
 - `redux` with `redux-thunk`
 
-Plugins:
+Modules:
 
-- [`react-plugin-localization`](https://github.com/FrameMuse/react-plugin-localization)
+- Modal
+- Localization
 
 Predefined:
 
