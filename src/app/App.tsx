@@ -1,21 +1,33 @@
-import Localization from "modules/localization/controller"
-import useLocalization from "modules/localization/hook"
+import "app/assets/scss/base.scss"
+import "app/assets/scss/app.scss"
 
-import { FAQ, FAQClause } from "./components/common/FAQ/FAQ"
+import ClientAPI from "api/client"
+import { PopupContainer } from "modules/popup/container"
+import { Suspense } from "react"
+import { ClientContextProvider } from "react-fetching-library"
+import { Provider } from "react-redux"
+import { BrowserRouter } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import store from "redux/store"
 
+import AppRouter from "./AppRouter"
+import ErrorBoundary from "./components/services/ErrorBoundary/ErrorBoundary"
 
 function App() {
-  const ll = useLocalization(ll => ll)
   return (
-    <>
-      <button onClick={() => Localization.transit("ru")}>To russian</button>
-      <button onClick={() => Localization.transit("en")}>To english</button>
-      {ll?.lang}
-
-      <FAQ>
-        <FAQClause summary="asd">asd</FAQClause>
-      </FAQ>
-    </>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ClientContextProvider client={ClientAPI}>
+          <Suspense fallback="Loading...">
+            <ErrorBoundary fallback="Error">
+              <AppRouter />
+              <PopupContainer />
+              <ToastContainer />
+            </ErrorBoundary>
+          </Suspense>
+        </ClientContextProvider>
+      </Provider>
+    </BrowserRouter>
   )
 }
 

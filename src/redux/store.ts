@@ -5,12 +5,7 @@ import thunk from "redux-thunk"
 
 import combinedReducers from "./combinedReducers"
 
-const store = createStore(combinedReducers, compose(applyMiddleware(thunk)))
+const enhancer = compose(applyMiddleware(thunk))
+const store = createStore(combinedReducers, enhancer)
+
 export default store
-// Declarations
-declare module "redux" {
-  interface Store { }
-}
-declare module "react-redux" {
-  interface DefaultRootState extends ReturnType<typeof store.getState> { }
-}

@@ -1,10 +1,14 @@
-import { DataURLBase64 } from "interfaces/common"
+import "./extensions"
+
+import { Buffer } from "buffer"
+import { FormElements, URLDataBase64 } from "interfaces/utilities"
+import { ExtractInterpolations } from "interfaces/utilities"
 
 /**
  *
  * @returns `class1 class2`
  */
-export function classMerge(classNames: Array<string | null | undefined>): string {
+export function classMerge(...classNames: Array<string | null | undefined>): string {
   const space = " "
   return classNames.filter(Boolean).join(space)
 }
@@ -29,7 +33,7 @@ export function classWithModifiers(originClass: string, ...modifiers: Array<stri
  * @returns `state1=6&state2=horse` without `?`
  */
 export function createQuery(queryObject?: Record<string, unknown> | null): string {
-  if (!queryObject?.length) return ""
+  if (!queryObject || !Object.keys(queryObject).length) return ""
 
   const queryKeys = Object.keys(queryObject)
   const queryArray = queryKeys.map(key => {
@@ -43,13 +47,16 @@ export function createQuery(queryObject?: Record<string, unknown> | null): strin
   return queryArray.filter(Boolean).join("&")
 }
 
+export function toBase64(value: unknown) {
+  return Buffer.from(JSON.stringify(value)).toString("base64")
+}
 
-export function toBase64(file: File): Promise<DataURLBase64> {
+export function FileToURLDataBase64(file: File): Promise<URLDataBase64> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
     reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result as DataURLBase64)
+    reader.onload = () => resolve(reader.result as URLDataBase64)
     reader.onerror = reject
   })
 }
@@ -63,7 +70,6 @@ export async function getFileFromURL(url: string) {
 
   return new File(Uint8Array ? [Uint8Array] : [], fileName, { type: response.headers.get("content-type") || "image" })
 }
-
 
 
 /**
@@ -86,5 +92,27 @@ export function getFormElements<K extends string>(elements: HTMLFormControlsColl
   return data
 }
 
+
+/**
+ * Interpolates {variable} in string
+ */
+export function interpolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, string | number>): string {
+  const varKeys = Object.keys(vars) as ExtractInterpolations<T>[]
+  return varKeys.reduce((result: string, next) => result.replace(new RegExp(`{${next}}`, "g"), String(vars[next])), value)
+}
+
+
+export function getFormInputs<U extends string = string>(elements: FormElements<U> | HTMLFormControlsCollection) {
+  return [...elements].reduce<Record<U | (string & {}), string | number>>((result, next) => {
+    if (next instanceof HTMLInputElement) {
+      return { ...result, [next.name]: next.value }
+    }
+    return result
+  }, {} as any)
+}
+
+export function getCheckedValues(inputs: RadioNodeList & HTMLInputElement[]) {
+  return [...inputs].filter(input => input.checked).map(input => input.value)
+}
 
 export function noop(): void { /* Do nothing */ }

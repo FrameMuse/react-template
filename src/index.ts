@@ -1,3 +1,6 @@
+import "polyfills"
+import "preload"
+
 import App from "app/App"
 import { createElement } from "react"
 import ReactDOM from "react-dom"

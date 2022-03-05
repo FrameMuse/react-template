@@ -1,8 +1,10 @@
 import { combineReducers } from "redux"
 
-import search from "./reducers/search"
+import user from "./reducers/user"
 
-const reducers = {}
+export const reducers = {
+  user,
+}
 
 const combinedReducers = combineReducers(reducers)
 export default combinedReducers

@@ -1,5 +1,5 @@
 {
-  "name": "react-app",
+  "name": "react-template",
   "private": true,
   "dependencies": {
     "html-react-parser": "^1.4.8",

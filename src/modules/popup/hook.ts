@@ -16,16 +16,12 @@ copies or substantial portions of the Software.
 
 */
 
-import { useContext, useRef } from "react"
+import { useContext } from "react"
 
 import { PopupContext } from "./context"
-import { PopupWindow } from "./interfaces"
 
-export function usePopupContext() {
-  const context = useRef(useContext(PopupContext))
-
-  return {
-    ...context.current,
-    component: undefined
-  } as Omit<PopupWindow, "component">
+export function usePopup() {
+  const context = useContext(PopupContext)
+  if (!context) throw new Error("PopupError: Out of popup context")
+  return context
 }
