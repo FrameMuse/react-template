@@ -20,15 +20,15 @@ import { Component } from "react"
 import { classWithModifiers } from "utils/common"
 
 import { modalContext } from "./context"
-import { ModalPrivate } from "./controller"
-import { ModalWindow } from "./interfaces"
+import { modalPrivate as ModalPrivate } from "./controller"
+import { ModalWindow } from "./types"
 
 export interface ModalContainerProps {
   className?: string
 }
 export interface ModalContainerState {
   isActive: boolean
-  queue: ModalWindow[]
+  queue: ModalWindow<unknown>[]
 }
 
 export class ModalContainer extends Component<ModalContainerProps, ModalContainerState> {
@@ -37,7 +37,7 @@ export class ModalContainer extends Component<ModalContainerProps, ModalContaine
     queue: []
   }
 
-  constructor(props: any) {
+  constructor(props: ModalContainerProps) {
     super(props)
     // Set Modal dispatcher
     ModalPrivate.dispatch = this.setState.bind(this)

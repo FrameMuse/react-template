@@ -17,15 +17,13 @@ copies or substantial portions of the Software.
 */
 
 import { Dispatch, SetStateAction } from "react"
+import { AnyIfEmpty } from "react-redux"
+import { toBase64 } from "utils/common"
 
 import { ModalContainerState } from "./container"
-import { ModalComponent, ModalParams, ModalWindow } from "./interfaces"
+import { ModalComponent, ModalParams, ModalWindow } from "./types"
 
-type AnyIfEmpty<T extends object> = keyof T extends never ? any : T
-
-const convertToBase64 = (data: any) => Buffer.from(JSON.stringify(data)).toString("base64")
-
-export const ModalPrivate: {
+export const modalPrivate: {
   dispatch: Dispatch<SetStateAction<ModalContainerState>>
 } = {
   dispatch: () => { throw new Error("ModalError: no containers were found") }
@@ -36,24 +34,24 @@ export class Modal {
     P extends object = {},
     AC extends Partial<ModalParams> & P = Partial<ModalParams> & P
   >(
-    component: ModalComponent<P>,
+    component: ModalComponent<unknown>,
     ...[params]: AnyIfEmpty<P> extends object ? [AC] : [AC?]
   ): Promise<void> {
     return new Promise<void>(function (resolve) {
-      const ModalWindow = { component, params, close }
-      Modal.addToQueue(ModalWindow)
+      const ModalWindow: ModalWindow = { component, params, close }
+      Modal.add(ModalWindow)
       function close() {
         resolve()
-        Modal.removeFromQueue(ModalWindow)
+        Modal.remove(ModalWindow)
       }
     })
   }
-  private static addToQueue(ModalWindow: ModalWindow<any>) {
-    ModalPrivate.dispatch(state => {
+  private static add(modalWindow: ModalWindow) {
+    modalPrivate.dispatch(state => {
       // Skip adding to queue if there is already the same window
       if (state.queue.length > 0) {
         const lastWindow = state.queue[state.queue.length - 1]
-        if ((convertToBase64(lastWindow.params || {}) === convertToBase64(ModalWindow.params || {})) && lastWindow.component === ModalWindow.component) {
+        if ((toBase64(lastWindow.params) === toBase64(modalWindow.params)) && lastWindow.component === modalWindow.component) {
           return { ...state, isActive: true }
         }
       }
@@ -62,28 +60,28 @@ export class Modal {
       if (state.isActive === false && state.queue.length === 1) {
         return {
           isActive: true,
-          queue: [ModalWindow]
+          queue: [modalWindow]
         }
       }
       return {
         isActive: true,
-        queue: [...state.queue, ModalWindow]
+        queue: [...state.queue, modalWindow]
       }
     })
   }
-  private static removeFromQueue(ModalWindow: ModalWindow<any>) {
-    ModalPrivate.dispatch(state => {
-      const queue = state.queue.filter(pw => pw !== ModalWindow)
+  private static remove(modalWindow: ModalWindow) {
+    modalPrivate.dispatch(state => {
+      const queue = state.queue.filter(pw => pw !== modalWindow)
       // Hide modal without removing if it's the last window
       if (queue.length === 0) {
-        return { isActive: false, queue: [ModalWindow] }
+        return { isActive: false, queue: [modalWindow] }
       }
       return { ...state, queue }
     })
   }
   public static closeAll() {
-    ModalPrivate.dispatch(state => {
-      state.queue.forEach(Modal => Modal.close())
+    modalPrivate.dispatch(state => {
+      state.queue.forEach(modal => modal.close())
       return {
         isActive: false,
         queue: []

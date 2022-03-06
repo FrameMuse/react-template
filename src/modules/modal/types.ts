@@ -27,7 +27,7 @@ export interface ModalParams {
   closable: boolean
 }
 
-export interface ModalWindow<P = {}> {
+export interface ModalWindow<P = unknown> {
   component: ModalComponent<Partial<ModalParams> & P>
   params?: Partial<ModalParams> & P
   close: () => void
