@@ -1,6 +1,4 @@
-import { Action } from "api/client"
-
-// import { PostAccountTokenResponse } from "./account.types"
+import { Action } from "api/client.types"
 
 export const getAccountMe: Action = {
   method: "GET",

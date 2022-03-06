@@ -1,4 +1,4 @@
-import { Action } from "api/client"
+import { Action } from "api/client.types"
 
 
 export const postError = (name: string, message: string, stack: string | string[]): Action<{ id: number; }> => ({

@@ -1,29 +1,7 @@
-import { Action as BaseAction, createClient } from "react-fetching-library"
+import { createClient } from "react-fetching-library"
 
 import { cacheProvider } from "./cache"
 import { requestInterceptor, responseInterceptor } from "./interceptors"
-
-declare module "react-fetching-library" {
-  // https://marcin-piela.github.io/react-fetching-library/#/?id=config-object
-  export interface Action<R = any, Ext = any> {
-    params?: Record<string, unknown>
-  }
-}
-
-export interface APIResponseError {
-  error: {
-    type: "error" | "warning"
-    code: string | number
-    detail: any // For development
-  }
-}
-
-interface ActionConfig {
-  skipAuth: boolean
-  skipCache: boolean
-}
-
-export type Action<P = unknown> = BaseAction<P & APIResponseError, Partial<ActionConfig>>
 
 export const ClientAPI = createClient({
   requestInterceptors: [requestInterceptor],
