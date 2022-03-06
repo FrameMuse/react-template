@@ -47,7 +47,8 @@ export function createQuery(queryObject?: Record<string, unknown> | null): strin
   return queryArray.filter(Boolean).join("&")
 }
 
-export function toBase64(value: unknown) {
+export function toBase64<T = unknown>(value: T | null | undefined) {
+  if (value == null) return String(value)
   return Buffer.from(JSON.stringify(value)).toString("base64")
 }
 
@@ -73,27 +74,6 @@ export async function getFileFromURL(url: string) {
 
 
 /**
- *
- * @param elements
- * @param keys
- * @returns
- */
-export function getFormElements<K extends string>(elements: HTMLFormControlsCollection, ...keys: K[]): Record<K, string> | null {
-  const data = Object.fromEntries(keys.map(key => [key, ""])) as Record<K, string>
-
-  for (const element of elements) {
-    if (!(element instanceof HTMLInputElement)) continue
-    if (!keys.includes(element.name as K)) continue
-    if (!element.value.length) return null
-
-    data[element.name as K] = element.value
-  }
-
-  return data
-}
-
-
-/**
  * Interpolates {variable} in string
  */
 export function interpolate<T extends string>(value: T, vars: Record<ExtractInterpolations<T>, string | number>): string {
@@ -108,11 +88,5 @@ export function getFormInputs<U extends string = string>(elements: FormElements<
       return { ...result, [next.name]: next.value }
     }
     return result
-  }, {} as any)
+  }, {} as never)
 }
-
-export function getCheckedValues(inputs: RadioNodeList & HTMLInputElement[]) {
-  return [...inputs].filter(input => input.checked).map(input => input.value)
-}
-
-export function noop(): void { /* Do nothing */ }
