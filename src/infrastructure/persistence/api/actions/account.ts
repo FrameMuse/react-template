@@ -1,4 +1,4 @@
-import { Action } from "api/client.types"
+import { Action } from "infrastructure/persistence/api/client.types"
 
 export const getAccountMe: Action = {
   method: "GET",

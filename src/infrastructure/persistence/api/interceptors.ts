@@ -1,11 +1,11 @@
+import { updateUser } from "infrastructure/persistence/redux/reducers/user"
+import store from "infrastructure/persistence/redux/store"
 import Localization from "modules/localization/controller"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
-import { updateUser } from "redux/reducers/user"
-import store from "redux/store"
 import { createQuery } from "utils/common"
 
-import { Action, APIResponseError } from "./client"
+import { Action, APIResponseError } from "./client.types"
 
 
 type Response<T = unknown> = QueryResponse<T & APIResponseError>
@@ -63,7 +63,7 @@ function responseErrorHandling(response: Response) {
   if (process.env.NODE_ENV === "development") {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      for (const field of Object.values(response.payload?.error.detail) as any) {
+      for (const field of Object.values(response.payload?.error.detail as never) as any) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         for (const fieldError of Object.values(field) as any) {
           toast.error(fieldError.message)

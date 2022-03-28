@@ -1,5 +1,5 @@
+import { MapActions } from "infrastructure/persistence/redux/store.types"
 import { ValuesOf } from "interfaces/utilities"
-import { MapActions } from "redux/store.types"
 
 import { User } from "./types"
 
