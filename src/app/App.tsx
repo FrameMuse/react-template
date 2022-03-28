@@ -8,7 +8,7 @@ import { Provider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 
-import AppRouter from "./AppRouter"
+import AppRoutes from "./AppRouter"
 import CookiesNotice from "./containers/CookiesNotice/CookiesNotice"
 import ErrorBoundary from "./containers/ErrorBoundary/ErrorBoundary"
 import ErrorFallback from "./containers/ErrorFallback/ErrorFallback"
@@ -19,7 +19,7 @@ function App() {
     <AppProviders>
       <Suspense fallback="Loading...">
         <ErrorBoundary fallback={ErrorFallback}>
-          <AppRouter />
+          <AppRoutes />
           <CookiesNotice />
           <ModalContainer />
           <ToastContainer />
