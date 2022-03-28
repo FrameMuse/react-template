@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.local.json",
   "compilerOptions": {
     "target": "ES5",
     "lib": [
@@ -22,8 +23,7 @@
     "strictNullChecks": true,
     "downlevelIteration": true,
     "noImplicitAny": true,
-    "jsx": "react-jsx",
-    "checkJs": false
+    "jsx": "react-jsx"
   },
   "watchOptions": {
     "watchFile": "useFsEvents",
