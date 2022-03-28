@@ -1,5 +1,5 @@
-import { postError } from "api/actions/error"
-import ClientAPI from "api/client"
+import { postError } from "infrastructure/persistence/api/actions/error"
+import ClientAPI from "infrastructure/persistence/api/client"
 import { Component, ErrorInfo, ReactNode } from "react"
 
 interface ErrorBoundaryProps {

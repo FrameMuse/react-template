@@ -20,7 +20,7 @@ import { Component } from "react"
 import { classWithModifiers } from "utils/common"
 
 import { modalContext } from "./context"
-import { modalPrivate as ModalPrivate } from "./controller"
+import { modalPrivate } from "./controller"
 import { ModalWindow } from "./types"
 
 export interface ModalContainerProps {
@@ -40,7 +40,7 @@ export class ModalContainer extends Component<ModalContainerProps, ModalContaine
   constructor(props: ModalContainerProps) {
     super(props)
     // Set Modal dispatcher
-    ModalPrivate.dispatch = this.setState.bind(this)
+    modalPrivate.dispatch = this.setState.bind(this)
   }
 
   render() {
