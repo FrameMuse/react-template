@@ -1,8 +1,9 @@
 import "./extensions"
 
 import { Buffer } from "buffer"
-import { FormElements, URLDataBase64 } from "interfaces/utilities"
+import { URLDataBase64 } from "interfaces/utilities"
 import { ExtractInterpolations } from "interfaces/utilities"
+import { SyntheticEvent } from "react"
 
 /**
  *
@@ -82,11 +83,23 @@ export function interpolate<T extends string>(value: T, vars: Record<ExtractInte
 }
 
 
-export function getFormInputs<U extends string = string>(elements: FormElements<U> | HTMLFormControlsCollection) {
-  return [...elements].reduce<Record<U | (string & {}), string | number>>((result, next) => {
-    if (next instanceof HTMLInputElement) {
-      return { ...result, [next.name]: next.value }
+/**
+ * Stops propagation from container
+ * @param callback any function
+ * @returns mouse event handler
+ */
+export function stopPropagation(callback?: Function | null) {
+  return ({ target, currentTarget }: Event | SyntheticEvent) => {
+    if (target instanceof Element && currentTarget instanceof Element) {
+      if (target !== currentTarget) return
     }
-    return result
-  }, {} as never)
+
+    callback?.()
+  }
+}
+
+export function inputValue(callback: Function) {
+  return (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    callback(event.currentTarget.value)
+  }
 }
