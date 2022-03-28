@@ -1,19 +1,17 @@
 import { Route, Routes } from "react-router"
 
-function AppRouter() {
+function AppRoutes() {
   return (
     <Routes>
-      <AppBasicRoutes />
+      <Route path="/">
+        <Route path="*" element="<HomeView />" />
+        <Route element="<ViewLayout />">
+          <Route index element="<HomeView />" />
+          {/* ... */}
+        </Route>
+      </Route>
     </Routes>
   )
 }
 
-export function AppBasicRoutes() {
-  return (
-    <Routes>
-      <Route path="/" />
-    </Routes>
-  )
-}
-
-export default AppRouter
+export default AppRoutes

@@ -1,6 +1,6 @@
 import { createCache, QueryResponse } from "react-fetching-library"
 
-import { Action } from "./client"
+import { Action } from "./client.types"
 
 const cacheTime = Number(process.env.REACT_APP_API_CACHE_TIME)
 
