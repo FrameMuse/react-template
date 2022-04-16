@@ -1,16 +1,16 @@
 {
   "settings": {
     "react": {
-      "createClass": "createReactClass", // Regex for Component Factory to use,
-      // default to "createReactClass"
-      "pragma": "React", // Pragma to use, default to "React"
-      "fragment": "Fragment", // Fragment to use (may be a property of <pragma>), default to "Fragment"
       "version": "detect",
       "linkComponents": [
         // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
         "Hyperlink",
         {
           "name": "Link",
+          "linkAttribute": "to"
+        },
+        {
+          "name": "OuterLink",
           "linkAttribute": "to"
         }
       ]
@@ -49,7 +49,6 @@
     "no-multi-spaces": "error",
     "simple-import-sort/imports": "error",
     "semi": ["error", "never"],
-    "linebreak-style": ["error", "unix"],
 
     "indent": [
       "error",

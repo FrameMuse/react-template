@@ -1,9 +1,9 @@
 import "./extensions"
 
 import { Buffer } from "buffer"
-import { URLDataBase64 } from "interfaces/utilities"
-import { ExtractInterpolations } from "interfaces/utilities"
 import { SyntheticEvent } from "react"
+import { URLDataBase64 } from "utils/interfaces/types"
+import { ExtractInterpolations } from "utils/interfaces/utilities"
 
 /**
  *
