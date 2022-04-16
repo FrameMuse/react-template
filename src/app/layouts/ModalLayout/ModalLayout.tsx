@@ -3,7 +3,7 @@ import "app/assets/scss/modal.scss"
 import { useModal } from "app/containers/Modal/hooks/useModal"
 import Icon from "app/ui/Icon/Icon"
 import { ReactNode, useEffect } from "react"
-import ReactGA from "react-ga"
+import ReactGA from "react-ga4"
 
 interface ModalLayoutProps {
   title: string
@@ -13,7 +13,10 @@ interface ModalLayoutProps {
 
 function ModalLayout(props: ModalLayoutProps) {
   const { close, component } = useModal()
-  useEffect(() => ReactGA.modalview(component.toString()), [component])
+  useEffect(() => ReactGA.send({
+    hitType: "modalview",
+    view: component.toString()
+  }), [component])
   return (
     <div className="modal-layout" style={{ width: props.width }}>
       <button className="modal-layout__close" type="button" onClick={close}><Icon name="cross" /></button>

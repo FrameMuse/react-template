@@ -5,7 +5,7 @@ import { ErrorInfo } from "react"
 
 import FatalError from "./FatalError"
 
-function ErrorFallback(reset: ErrorBoundaryReset, error: ErrorBoundaryError, errorInfo: ErrorInfo) {
+function ErrorFallback(reset: ErrorBoundaryReset, error?: ErrorBoundaryError, errorInfo?: ErrorInfo) {
   return (
     <FatalError reset={reset} error={error} errorInfo={errorInfo} />
   )

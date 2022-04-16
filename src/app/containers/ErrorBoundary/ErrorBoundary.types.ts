@@ -12,6 +12,7 @@ export interface asd {
 export interface ErrorBoundaryProps {
   deps?: unknown[]
   fallback: ReactNode | ((reset: ErrorBoundaryReset, error?: ErrorBoundaryError, errorInfo?: ErrorInfo) => JSX.Element)
+  children: ReactNode | ReactNode[]
 }
 export interface ErrorBoundaryState {
   hasError: boolean
