@@ -1,10 +1,10 @@
-import Localization from "infrastructure/localization/controller"
 import { updateUser } from "infrastructure/persistence/redux/reducers/user"
 import store from "infrastructure/persistence/redux/store"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
 import { createQuery } from "utils/common"
 
+import Localization from "../localization/controller"
 import { Action, APIResponseError } from "./client.types"
 
 

@@ -17,7 +17,7 @@ copies or substantial portions of the Software.
 */
 
 import DefaultLangJSON from "app/assets/lang/ru.json"
-import parse from "html-react-parser"
+import parse, { Element } from "html-react-parser"
 import { createElement, ReactNode } from "react"
 import { Link } from "react-router-dom"
 
@@ -33,9 +33,10 @@ Localization.addInterceptor(ll => {
         htmlparser2: {
           lowerCaseTags: false
         },
-        replace: (domNode: any) => {
+        replace: (domNode) => {
+          if (!(domNode instanceof Element)) return
           if (domNode.name === "link") {
-            return createElement(Link, domNode.attribs)
+            return createElement(Link, { ...domNode.attribs, to: "" })
           }
         }
       })
