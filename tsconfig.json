@@ -25,13 +25,6 @@
     "noImplicitAny": true,
     "jsx": "react-jsx"
   },
-  "watchOptions": {
-    "watchFile": "useFsEvents",
-    "watchDirectory": "useFsEvents",
-    "fallbackPolling": "dynamicPriority",
-    "synchronousWatchDirectory": true,
-    "excludeDirectories": ["**/node_modules", "**/.git", "build"]
-  },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],
-  "exclude": ["node_modules/**/*", "build", "config", "docs", "env", "public", "scripts", ".vscode", ".github", "design"]
+  "exclude": ["node_modules/**/*", "build", "docs", "public", ".vscode", "design"]
 }
