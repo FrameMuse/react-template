@@ -44,7 +44,7 @@ function InputStrains<V>(props: InputMasksProps<V>) {
   const parentRef = useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const [currentStrain, setCurrentStrain] = useState(props.strains[0])
-  function onChange(index: number) {
+  function onSelect(_value: never, index: number) {
     const strain = props.strains[index]
 
     setCurrentStrain(strain)
@@ -58,7 +58,7 @@ function InputStrains<V>(props: InputMasksProps<V>) {
         <Icon className={classWithModifiers("input-masks__icon", isExpanded && "up")} name="chevron" />
       </button>
       <div className="input-masks__list">
-        <DropDown<number> expanded={isExpanded} onChange={onChange}>
+        <DropDown<number> expanded={isExpanded} onSelect={onSelect}>
           {props.strains.map((mask, index) => (
             <option value={index} key={index}>{mask.title}</option>
           ))}

@@ -22,7 +22,7 @@ function Details(props: DetailsProps) {
   }, [])
   return (
     <div className="details" aria-expanded={expanded}>
-      <div className="details__header">
+      <div className="details__header" onClick={() => setExpanded(!expanded)}>
         <div className="details__left">
           {props.date && (
             <div className="details__date">{humanizeDate("ru", props.date)}</div>
@@ -31,7 +31,7 @@ function Details(props: DetailsProps) {
         </div>
         <div className="details__right" onClick={() => setExpanded(!expanded)}>
           <Icon className={classWithModifiers("details__chevron", expanded && "up")} name="chevron" />
-          <Icon className="details__more" name="dots" />
+          <Icon className="details__more" name="ch" />
         </div>
       </div>
       <div className={classWithModifiers("details__body", expanded && "expanded")} style={{ "--details-height": height }} aria-hidden={!expanded}>

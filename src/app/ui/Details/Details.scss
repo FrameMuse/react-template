@@ -19,6 +19,7 @@
 
 .details__summary {
 	font-weight: 600;
+	cursor: pointer;
 }
 
 .details__right {
@@ -26,6 +27,8 @@
 	gap: 0.5em;
 
 	cursor: pointer;
+
+	display: none;
 }
 
 .details__chevron {

@@ -37,7 +37,7 @@ function Selector<V = string | undefined>(props: SelectorProps<V>) {
         <div className={classWithModifiers("selector__current", !children && "empty")}>{children || "Выбрать из списка..."}</div>
         <Icon className={classWithModifiers("selector__icon", expanded && "up")} name="chevron" />
       </button>
-      <DropDown name={props.name} default={props.defaultValue} expanded={expanded} onChange={onChange}>{props.children}</DropDown>
+      <DropDown name={props.name} default={props.defaultValue} expanded={expanded} onSelect={onChange}>{props.children}</DropDown>
     </div>
   )
 }
