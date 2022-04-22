@@ -22,16 +22,12 @@ export const ClientAPI = createClient({
 })
 
 if (process.env.NODE_ENV === "development") {
-  // https://webpack.js.org/guides/dependency-management/#context-module-api
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  const importAll = r => r.keys().reduce((a, k) => ({ ...a, ...r(k) }), {})
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   window.ClientAPI = ClientAPI
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
-  window.ActionsAPI = importAll(require.context("./actions/", true, /\.ts$/, "sync"))
+  window.APIActions = require("infrastructure/persistence/api/data/actions")
 }
 
 export default ClientAPI
