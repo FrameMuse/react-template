@@ -1,3 +1,5 @@
+@import "~app/assets/scss/bundle.scss";
+
 * {
 	position: relative;
 	box-sizing: border-box;
@@ -9,6 +11,16 @@ body {
 }
 
 /* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	&:first-child {
+		margin-top: unset;
+	}
+}
 
 h1 {
 	font-size: 1.5rem;
@@ -84,7 +96,7 @@ button {
 
 pre {
 	padding: 1em;
-	background: #eaeaea;
+	background: rgba($color-white, 0.75);
 	border: 1px solid #bdbdbd;
 	border-radius: 0.25em;
 }
