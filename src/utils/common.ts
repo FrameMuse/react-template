@@ -31,15 +31,21 @@ export function classWithModifiers(originClass: string, ...modifiers: Array<stri
 
 /**
  * Creates query from given object
+ * - Stringify objects and arrays
+ * - Supports deep nesting
  * @returns `state1=6&state2=horse` without `?`
  */
-export function createQuery(queryObject?: Record<string, unknown> | null): string {
+export function createQuery(queryObject?: Record<string | number, unknown> | null): string {
   if (!queryObject || !Object.keys(queryObject).length) return ""
 
   const queryKeys = Object.keys(queryObject)
   const queryArray = queryKeys.map(key => {
     const value = queryObject[key]
     if (value) {
+      if (isDictionary(value)) {
+        return createQuery(value)
+      }
+
       return encodeURIComponent(key) + "=" + encodeURIComponent(String(value))
     }
     return ""
@@ -84,7 +90,7 @@ export function interpolate<T extends string>(value: T, vars: Record<ExtractInte
 
 
 /**
- * Stops propagation from container
+ * Stops propagation from container. Callback exists only on the `current` target
  * @param callback any function
  * @returns mouse event handler
  */
@@ -102,4 +108,25 @@ export function inputValue(callback: Function) {
   return (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     callback(event.currentTarget.value)
   }
+}
+
+/**
+ * Propagates the array, creating minimum fill level of the array by duplicating its items
+ * @returns new array
+ */
+export function minFill<T>(array: T[], minLevel?: number): T[] {
+  if (array.length === 0) return array
+  if (!minLevel || array.length >= minLevel) {
+    return array
+  }
+
+  const newArray: T[] = []
+  for (let i = 0; i < (minLevel - array.length); i++) {
+    newArray.push(...array.slice(0, minLevel - newArray.length))
+  }
+  return newArray
+}
+
+export function isDictionary(object: unknown): object is Record<keyof unknown, unknown> {
+  return object instanceof Object && object.constructor === Object
 }
