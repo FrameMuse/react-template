@@ -33,10 +33,6 @@
   "Create reducer": {
     "prefix": "reducer",
     "body": [
-      "import { ValuesOf } from \"interfaces/common\"",
-      "import { MapActions } from \"interfaces/reducer\"",
-      "import { User } from \"interfaces/user\"",
-      "",
       "const initialState: User = {",
       "  auth: false",
       "}",
