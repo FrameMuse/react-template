@@ -1,5 +1,6 @@
 import "app/assets/scss/base.scss"
 
+import DevHub from "dev/components/Hub/DevHub"
 import ClientAPI from "infrastructure/persistence/api/client"
 import store from "infrastructure/persistence/redux/store"
 import { ReactNode, Suspense } from "react"
@@ -23,6 +24,7 @@ function App() {
           <CookiesNotice />
           <ModalContainer />
           <ToastContainer />
+          <DevHub />
         </ErrorBoundary>
       </Suspense>
     </AppProviders>

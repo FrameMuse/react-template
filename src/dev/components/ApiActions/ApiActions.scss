@@ -1,0 +1,55 @@
+@import "~app/assets/scss/bundle.scss";
+
+.api-actions {
+	position: fixed;
+	top: 0;
+	right: 0;
+
+	display: grid;
+	align-content: flex-start;
+
+	width: 35em;
+	height: 100vh;
+	padding: 1em;
+
+	background: rgba($color-gray, 0.05);
+	border-radius: 0.25em;
+	box-shadow: 0 0 6px -2px rgba($color-gray, 0.75);
+
+	overflow: auto;
+}
+
+.api-actions__search {
+	flex: 1;
+
+	padding: 0.75em 1em;
+	background: $color-white;
+	border: 1px solid rgba($color-gray, 0.25);
+	border-radius: 0.25em;
+}
+
+.api-actions__list {
+	display: grid;
+	gap: 1.5em;
+}
+
+/* Action */
+
+.api-action {
+	display: grid;
+	gap: 0.5em;
+
+	padding: 0.75em 1em;
+	border: 1px solid $color-gray;
+	border-radius: 0.25em;
+}
+
+.api-action__title {
+	font-size: 1.25rem;
+}
+
+.api-action__code {
+	pre {
+		margin: unset;
+	}
+}
