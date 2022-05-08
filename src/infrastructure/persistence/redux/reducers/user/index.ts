@@ -1,4 +1,4 @@
-import { ValuesOf } from "utils/interfaces/utilities"
+import { ValuesOf } from "utils/types-utils"
 
 import { MapActions } from "../../store.types"
 import { User } from "./types"

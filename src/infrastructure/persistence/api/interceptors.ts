@@ -31,7 +31,7 @@ export function requestInterceptor() {
 }
 export function responseInterceptor() {
   return async (_action: Action, response: Response) => {
-    if (isErrorOcurred(response)) {
+    if (hasResponseError(response)) {
       responseErrorHandling(response)
       return { ...response, error: true }
     }
@@ -40,7 +40,7 @@ export function responseInterceptor() {
   }
 }
 
-function isErrorOcurred(response: Response): boolean {
+function hasResponseError(response: Response): boolean {
   if ((response.status || 0) >= 400) {
     return true
   }
@@ -49,7 +49,7 @@ function isErrorOcurred(response: Response): boolean {
     return true
   }
 
-  if (response.payload?.status !== true) {
+  if (response.payload?.error) {
     return true
   }
 
@@ -63,6 +63,6 @@ function responseErrorHandling(response: Response) {
     toast.info("Токен был сброшен, авторизуйтесь ещё раз")
     store.dispatch(updateUser({ auth: false }))
   }
-  toast.error(response.payload?.msg)
+  toast.error(response.payload?.error.codes)
   return { ...response, error: true }
 }

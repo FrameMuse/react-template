@@ -22,9 +22,9 @@ function Selector<V = string | undefined>(props: SelectorProps<V>) {
   const parentRef = useRef<HTMLDivElement>(null)
   const [children, setChildren] = useState<ReactNode>(options.find(option => option.value === props.defaultValue)?.children || null)
   const [expanded, setExpanded] = useState(false)
-  function onChange(value: V, children: ReactNode) {
-    props.onChange?.(value)
-    setChildren(children)
+  function onSelect(option: { value: V, children: ReactNode }) {
+    props.onChange?.(option.value)
+    setChildren(option.children)
     setExpanded(false)
   }
   useClickAway(parentRef, () => setExpanded(false))
@@ -37,7 +37,7 @@ function Selector<V = string | undefined>(props: SelectorProps<V>) {
         <div className={classWithModifiers("selector__current", !children && "empty")}>{children || "Выбрать из списка..."}</div>
         <Icon className={classWithModifiers("selector__icon", expanded && "up")} name="chevron" />
       </button>
-      <DropDown name={props.name} default={props.defaultValue} expanded={expanded} onSelect={onChange}>{props.children}</DropDown>
+      <DropDown<V> name={props.name} default={props.defaultValue} expanded={expanded} onSelect={onSelect}>{props.children}</DropDown>
     </div>
   )
 }

@@ -8,8 +8,10 @@ declare module "react-fetching-library" {
 }
 
 export interface APIResponseError {
-  status: boolean
-  msg: string
+  error: {
+    type: string
+    codes: string[]
+  }
 }
 
 interface ActionConfig {
