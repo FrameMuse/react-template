@@ -1,5 +1,6 @@
 import "app/assets/scss/base.scss"
 
+import { LocaleProvider } from "@hi18n/react"
 import ClientAPI from "infrastructure/persistence/api/client"
 import store from "infrastructure/persistence/redux/store"
 import { ReactNode, Suspense } from "react"
@@ -33,9 +34,11 @@ function AppProviders(props: { children: ReactNode }) {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <ClientContextProvider client={ClientAPI}>
-          {props.children}
-        </ClientContextProvider>
+        <LocaleProvider locales={["ru", "en"]}>
+          <ClientContextProvider client={ClientAPI}>
+            {props.children}
+          </ClientContextProvider>
+        </LocaleProvider>
       </Provider>
     </BrowserRouter>
   )
