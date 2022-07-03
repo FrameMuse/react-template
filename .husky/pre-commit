@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+
+commitMsg="$(cat .git/COMMIT_EDITMSG)"
+
+# npm test
+echo $commitMsg
+
