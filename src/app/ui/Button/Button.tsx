@@ -1,7 +1,7 @@
 import "./Button.scss"
 
 import { MouseEvent, MouseEventHandler, useState } from "react"
-import ReactGA from "react-ga"
+import ReactGA from "react-ga4"
 import { classMerge, classWithModifiers } from "utils/common"
 
 import Loader from "../Loader/Loader"
@@ -12,27 +12,55 @@ interface ButtonProps extends ButtonBaseProps {
   eventLabel?: string
   disabled?: boolean
   await?: boolean
+  catch?: Error | boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 function Button(props: ButtonProps) {
+  const [error, setError] = useState(false)
   const [pending, setPending] = useState(false)
-  async function onClick(event: MouseEvent<HTMLButtonElement>) {
-    if (props.await) {
-      setPending(true)
-      await props.onClick?.(event)
-      setPending(false)
-    } else {
+  function onClick(event: MouseEvent<HTMLButtonElement>) {
+    GAButtonClick()
+
+    handleOnClick(event)
+  }
+
+  async function awaitOnClick(event: MouseEvent<HTMLButtonElement>) {
+    if (!props.await) {
       props.onClick?.(event)
+      return
     }
-    /* --- Google Analytics --- */
-    if (props.eventLabel) {
-      ReactGA.event({
-        category: "User",
-        action: "Clicked Button",
-        label: props.eventLabel
-      })
+
+    setPending(true)
+    await props.onClick?.(event)
+    setPending(false)
+  }
+  function handleOnClick(event: MouseEvent<HTMLButtonElement>) {
+    if (!props.catch) {
+      awaitOnClick(event)
+      return
     }
+
+    try {
+      awaitOnClick(event)
+    } catch (error) {
+      if (typeof props.catch === "function") {
+        if (error instanceof props.catch) {
+          setError(true)
+        }
+      }
+
+      throw error
+    }
+  }
+  function GAButtonClick() {
+    if (props.eventLabel == null) return
+
+    ReactGA.event({
+      category: "Button",
+      action: "click",
+      label: props.eventLabel
+    })
   }
 
   const modifiers: string[] = []
@@ -41,8 +69,14 @@ function Button(props: ButtonProps) {
   if (props.outline) modifiers.push("outline")
   if (pending) modifiers.push("pending")
 
+  if (error) {
+    return (
+      <Button {...props}>Произошла ошибка</Button>
+    )
+  }
+
   return (
-    <button className={classMerge(classWithModifiers("button", ...modifiers), props.className)} type={props.type || "button"} disabled={props.disabled || pending} aria-busy={pending} onClick={onClick}>
+    <button className={classMerge(classWithModifiers("button", ...modifiers), props.className)} type={props.type || "button"} disabled={props.disabled || pending || error} aria-busy={pending} onClick={onClick}>
       {props.iconLeft && (
         <div className="button__icon">{props.iconLeft}</div>
       )}
