@@ -1,0 +1,19 @@
+name: Lighthouse CI
+on: [deployment_status, workflow_dispatch]
+env:
+    ACC_MIN: 0.90
+    BPR_MIN: 0.90
+    PRF_MIN: 0.90
+    SEO_MIN: 0.95
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          urls: |
+            ${{ github.event.deployment_status.environment_url }}
+          uploadArtifacts: true # save results as an action artifacts
+          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
