@@ -1,0 +1,25 @@
+@import "~app/assets/scss/bundle.scss";
+
+.media-file {
+  display: grid;
+  gap: 0.5em;
+
+  align-content: center;
+  justify-content: center;
+
+  aspect-ratio: 1;
+  max-width: 10em;
+
+  background: #f9f9f9;
+  border: 1px solid #d9d9d9;
+  border-radius: $border-radius-1;
+  box-shadow: 0 0 6px -4px black;
+}
+
+.media-file__name {
+  text-align: center;
+}
+
+.media-file__type {
+  text-align: center;
+}
