@@ -1,0 +1,52 @@
+{
+  "translation": {
+    "lang": {
+      "name": "string",
+      "code": "string",
+      "currency": "string"
+    },
+    "common": {
+      "navigation": {
+        "links": {
+          "home": "string",
+          "terms": "string",
+          "privacyPolicy": "string",
+          "cookiesPolicy": "string",
+          "support": "string"
+        }
+      }
+    },
+    "header": {
+      "menu": {
+        "mentors": "string",
+        "becomeMentor": "string"
+      }
+    },
+    "footer": {
+      "copyright": "string"
+    },
+    "views": {
+      "home": {
+        "introduction": {
+          "title": "string",
+          "desc": "string"
+        }
+      },
+      "howItWorks": {
+        "title": "string",
+        "desc": "string"
+      }
+    },
+    "components": {
+      "cookies": {
+        "desc": "string",
+        "acceptButton": "string"
+      }
+    },
+    "other": {
+      "pagination": {
+        "showMore": "string"
+      }
+    }
+  }
+}
