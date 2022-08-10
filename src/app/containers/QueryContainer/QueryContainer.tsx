@@ -3,7 +3,7 @@ import { Action, MapPredicate } from "infrastructure/persistence/api/client.type
 import { ReactNode, useEffect, useState } from "react"
 import { QueryError, useQuery } from "react-fetching-library"
 
-interface QueryContainerProps<P, M = {}> {
+interface QueryContainerProps<P, M = Record<string, unknown>> {
   action: Action<P>
   mapping?: MapPredicate<P, M>
   children: (payload: keyof M extends never ? P : M) => ReactNode

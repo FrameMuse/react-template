@@ -31,7 +31,7 @@ export const modalPrivate: {
 
 export class Modal {
   public static open<
-    P extends object = {},
+    P extends object = Record<string, unknown>,
     AC extends Partial<ModalParams> & P = Partial<ModalParams> & P
   >(
     component: ModalComponent<unknown>,
