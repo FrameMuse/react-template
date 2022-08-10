@@ -1,4 +1,5 @@
 # Template of Typescript React App
+[![Lighthouse CI](actions/workflows/Lighthouse.yml/badge.svg?event=deployment_status)](actions/workflows/Lighthouse.yml)
 
 ## Guidelines
 

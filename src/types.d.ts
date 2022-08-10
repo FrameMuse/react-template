@@ -9,3 +9,4 @@ export type OrderingType<U extends string> = U | `-${U}`
 
 // https://stackoverflow.com/questions/50158272/what-is-the-type-of-an-enum-in-typescript
 export type Enum<E> = Record<keyof E, number | string> & { [k: number]: string }
+export type ExtractArrayType<T> = T extends readonly (infer S)[] ? S : never
