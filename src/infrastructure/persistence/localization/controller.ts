@@ -32,7 +32,7 @@ type Interceptor = (ll: llType) => llType
 class Localization {
   private static defaultLanguage = navigator.language.split("-")[0]
 
-  private static listeners: Set<Function> = new Set
+  private static listeners: Set<() => unknown> = new Set
   private static interceptors: Set<Interceptor> = new Set
   public static storage = new Map<string, llType>()
 

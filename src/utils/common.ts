@@ -95,7 +95,7 @@ export function interpolate<T extends string>(value: T, vars: Record<ExtractInte
  * @param callback any function
  * @returns mouse event handler
  */
-export function stopPropagation(callback?: Function | null) {
+export function stopPropagation(callback?: () => void | null) {
   return ({ target, currentTarget }: Event | SyntheticEvent) => {
     if (target instanceof Element && currentTarget instanceof Element) {
       if (target !== currentTarget) return
@@ -105,7 +105,7 @@ export function stopPropagation(callback?: Function | null) {
   }
 }
 
-export function inputValue(callback: Function) {
+export function inputValue(callback: (value: string) => void) {
   return (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     callback(event.currentTarget.value)
   }
