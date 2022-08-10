@@ -1,5 +1,6 @@
 {
   "name": "react-template",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "buffer": "^6.0.3",
@@ -64,5 +65,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=14",
+    "vscode": ">=1.22.0"
   }
 }
