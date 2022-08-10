@@ -5,7 +5,7 @@ import { classMerge, classWithModifiers } from "utils/common"
 
 export type IconName = (
   | ""
-) | (string & {})
+) | (string & object)
 
 interface IconProps extends Exclude<SVGAttributes<SVGElement>, "aria-hidden"> {
   size?: string

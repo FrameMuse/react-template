@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.local.json",
   "compilerOptions": {
     "target": "ES5",
     "lib": [
@@ -24,8 +23,14 @@
     "downlevelIteration": true,
     "noImplicitAny": true,
     "jsx": "react-jsx",
-    "typeRoots": ["@types", "node_modules/@types"]
+    "typeRoots": [
+      "@types",
+      "node_modules/@types"
+    ]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],
-  "exclude": ["node_modules/**/*", "build", "docs", "public", ".vscode", "design"]
+  "include": [
+    "src",
+    "scripts",
+    "@types"
+  ]
 }

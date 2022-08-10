@@ -1,21 +1,4 @@
 {
-  "settings": {
-    "react": {
-      "version": "detect",
-      "linkComponents": [
-        // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
-        "Hyperlink",
-        {
-          "name": "Link",
-          "linkAttribute": "to"
-        },
-        {
-          "name": "OuterLink",
-          "linkAttribute": "to"
-        }
-      ]
-    }
-  },
   "env": {
     "node": true,
     "commonjs": true,
@@ -25,7 +8,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/jsx-runtime"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -45,11 +29,13 @@
     "simple-import-sort"
   ],
   "rules": {
-    "default-case": "warn",
+    "default-case": "error",
     "no-multi-spaces": "error",
     "simple-import-sort/imports": "error",
-    "semi": ["error", "never"],
-
+    "semi": [
+      "error",
+      "never"
+    ],
     "indent": [
       "error",
       2,
@@ -65,11 +51,7 @@
       }
     ],
     // OFF
-    "react/react-in-jsx-scope": "off",
-    "react/no-unescaped-entities": "off",
-
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/ban-types": "off"
+    "@typescript-eslint/no-empty-interface": "off"
   }
 }
