@@ -29,7 +29,7 @@
     "simple-import-sort"
   ],
   "rules": {
-    "default-case": "warn",
+    "default-case": "error",
     "no-multi-spaces": "error",
     "simple-import-sort/imports": "error",
     "semi": [

@@ -9,5 +9,7 @@
     "source.organizeImports": false,
     "source.fixAll.eslint": true
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true
 }
