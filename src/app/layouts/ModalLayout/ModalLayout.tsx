@@ -1,9 +1,9 @@
 import "app/assets/scss/modal.scss"
 
-import { useModal } from "app/containers/Modal/hooks/useModal"
 import Icon from "app/ui/Icon/Icon"
 import { ReactNode, useEffect } from "react"
 import ReactGA from "react-ga4"
+import { useModalContext } from "react-modal-global"
 
 interface ModalLayoutProps {
   title: string
@@ -12,7 +12,7 @@ interface ModalLayoutProps {
 }
 
 function ModalLayout(props: ModalLayoutProps) {
-  const { close, component } = useModal()
+  const { close, component } = useModalContext()
   useEffect(() => ReactGA.send({
     hitType: "modalview",
     view: component.toString()

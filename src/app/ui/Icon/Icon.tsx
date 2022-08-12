@@ -5,7 +5,9 @@ import { classMerge, classWithModifiers } from "utils/common"
 
 export type IconName = (
   | ""
-) | (string & object)
+  // `string & {}` is to make property accept both plain and literal string with suggestions in VSCode
+  // eslint-disable-next-line @typescript-eslint/ban-types
+) | (string & {})
 
 interface IconProps extends Exclude<SVGAttributes<SVGElement>, "aria-hidden"> {
   size?: string
