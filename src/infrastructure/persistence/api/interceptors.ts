@@ -1,10 +1,10 @@
+import i18next from "i18next"
 import { updateUser } from "infrastructure/persistence/redux/reducers/user"
 import store from "infrastructure/persistence/redux/store"
 import { QueryResponse } from "react-fetching-library"
 import { toast } from "react-toastify"
 import { createQuery } from "utils/common"
 
-import Localization from "../localization/controller"
 import { Action, APIResponseError } from "./client.types"
 
 
@@ -24,7 +24,7 @@ export function requestInterceptor() {
       endpoint: endpointTransform(action),
       headers: {
         Authorization: !action.config?.skipAuth && localStorage.getItem("token") || "",
-        "Accept-Language": Localization.lang
+        "Accept-Language": i18next.language
       }
     }
   }
