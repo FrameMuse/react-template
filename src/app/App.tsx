@@ -1,6 +1,8 @@
 import "app/assets/scss/base.scss"
 
+import i18next from "i18next"
 import ClientAPI from "infrastructure/persistence/api/client"
+import ReactJSONEditorContainer from "infrastructure/persistence/i18n/components/ReactJSONEditorContainer/ReactJSONEditorContainer"
 import store from "infrastructure/persistence/redux/store"
 import { ReactNode, Suspense } from "react"
 import { ClientContextProvider } from "react-fetching-library"
@@ -23,6 +25,7 @@ function App() {
           <CookiesNotice />
           <ModalContainer />
           <ToastContainer />
+          <ReactJSONEditorContainer i18n={i18next} />
         </ErrorBoundary>
       </Suspense>
     </AppProviders>

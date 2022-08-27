@@ -1,19 +1,16 @@
 import "jsoneditor/dist/jsoneditor.min.css"
 import "./ReactJSONEditorContainer.scss"
 
-import Button from "app/components/common/Button/Button"
-import LangSelector from "app/components/UI/LangSelector/LangSelector"
-import { i18n } from "i18next"
+import type { i18n } from "i18next"
 import JSONEditor, { JSONEditorOptions } from "jsoneditor"
 import { Component, createRef } from "react"
 
-
-interface JSONEditorContainerProps {
+interface ReactJSONEditorContainerProps {
   i18n: i18n
   options?: JSONEditorOptions
 }
 
-class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
+class ReactJSONEditorContainer extends Component<ReactJSONEditorContainerProps> {
   /**
    * Default options
    */
@@ -90,10 +87,10 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
   render() {
     return (
       <div className="react-json-editor">
-        <LangSelector />
+        {/* <LangSelector /> */}
         <div className="react-json-editor__editor" ref={this.editorContainerRef}></div>
         <div className="react-json-editor__toolbar">
-          <Button color="white" onClick={this.putUpdate.bind(this)}>Save</Button>
+          <button type="button" onClick={this.putUpdate.bind(this)}>Save</button>
         </div>
       </div>
     )
