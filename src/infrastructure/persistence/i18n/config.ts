@@ -5,7 +5,7 @@ import { initReactI18next } from "react-i18next"
 import { Link } from "react-router-dom"
 
 import { LocaleKeys, supportedLocales } from "./locales"
-import initReactMarkdownPostProcess from "./react-markdown-postprocess"
+import initReactMarkdownPostProcess from "./plugins/react-markdown-postprocess"
 
 export const localeLocalStorage = localStorage.getItem("lang") as LocaleKeys | null
 export const localeNavigator = window.navigator.language.split("-")[0] as LocaleKeys
@@ -13,6 +13,7 @@ export const localeFallback: LocaleKeys = "en"
 export const localeCurrent: LocaleKeys = localeLocalStorage || localeNavigator || localeFallback
 
 i18next
+  // .use(initExternalResourceBackend) // Use this plugin for backend localization files
   .use(initReactMarkdownPostProcess)
   .use(initReactI18next)
   .init({
