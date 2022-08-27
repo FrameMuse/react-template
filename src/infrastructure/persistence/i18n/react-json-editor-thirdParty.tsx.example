@@ -71,7 +71,7 @@ class ReactJSONEditorContainer extends Component<JSONEditorContainerProps> {
     if (data == null) return
 
     const i18n = this.props.i18n
-    const put = i18n.options.backend.put
+    const put = i18n.options.backend?.put
     if (put == null) return
 
 
