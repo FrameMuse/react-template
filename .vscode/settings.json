@@ -6,7 +6,7 @@
     "components/**/hooks"
   ],
   "editor.codeActionsOnSave": {
-    "source.organizeImports": false,
+    "source.organizeImports": true,
     "source.fixAll.eslint": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
