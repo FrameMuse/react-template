@@ -1,5 +1,8 @@
+import OuterLink from "app/ui/OuterLink/OuterLink"
 import i18next from "i18next"
+import { createElement } from "react"
 import { initReactI18next } from "react-i18next"
+import { Link } from "react-router-dom"
 
 import { LocaleKeys, supportedLocales } from "./locales"
 import initReactMarkdownPostProcess from "./react-markdown-postprocess"
@@ -22,11 +25,17 @@ i18next
     supportedLngs: supportedLocales,
 
     react: {
-      bindI18n: "react-refresh"
+      bindI18n: "react-refresh",
+
+      markdown: {
+        tokenElements: {
+          link: props => createElement(Link, { to: props.to, key: props.key }, props.children),
+          linkOuter: OuterLink
+        }
+      }
     }
   })
 
 i18next.on("languageChanged", () => {
   i18next.emit("react-refresh")
 })
-
