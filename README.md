@@ -15,10 +15,16 @@ This is common problem in frontend world - there is no generalized template, it'
 
 ## Guidelines
 
-### Setup the template
+### Deploy
 
-Follow these steps to setup the template properly
-- 
+#### Heroku
+
+Currenly, [Heroku](https://heroku.com/) supports build cra apps without any configuration.
+
+You also might need to know that Heroku consumes two scripts `build` for **building** and `start` for **serving build**, but cra template uses `start` as dev server. Then you will have to either put `react-scripts start` into another field (like `dev`) and make `start` as serving build (like `serve -s build`) or add a Heroku config file `Procfile` with this line
+```
+web: npm run serve
+```
 
 ## Adoptation
 
