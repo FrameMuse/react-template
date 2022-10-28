@@ -1,3 +1,3 @@
 # Requirements
 
-In the code should only be tits and boobs
+Probably your frontend app requirements
