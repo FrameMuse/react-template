@@ -15,6 +15,12 @@ This is common problem in frontend world - there is no generalized template, it'
 
 ## Guidelines
 
+### Gzip
+
+If you want to use gzipping in your app to enhance perfomance, you better use CDN (like [cloudflare](https://www.cloudflare.com/)) and setup gzip there.
+
+Another way is to use something like [nginx](https://www.nginx.com/) and enable serving of gzipped files there. But you also will need to gzip your build - you can do it by adding [`compress-cra`](https://www.npmjs.com/package/compress-create-react-app) to your app, just follow the instruction in the link.
+
 ### Deploy
 
 #### Heroku
