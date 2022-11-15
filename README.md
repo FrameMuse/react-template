@@ -32,8 +32,6 @@ You also might need to know that Heroku consumes two scripts `build` for **build
 web: npm run serve
 ```
 
-## Adoptation
-
 ## Useful packages
 
 - [`fuse.js`](https://www.npmjs.com/package/fuse.js) - For searching values
