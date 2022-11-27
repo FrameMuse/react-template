@@ -15,6 +15,19 @@ This is common problem in frontend world - there is no generalized template, it'
 
 ## Guidelines
 
+### API
+
+#### General
+
+1. There must be [Swagger](https://swagger.io/) documentaion.
+1. There must be, at least, necessary **autotests**.
+
+#### Asdnasjd
+
+1. If arrays are returned, they can't be `nullable` or `optional`, they are always `required` and in case of empty array should return `[]`.
+
+#### 
+
 ### Gzip
 
 If you want to use gzipping in your app to enhance perfomance, you better use CDN (like [cloudflare](https://www.cloudflare.com/)) and setup gzip there.
