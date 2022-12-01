@@ -1,13 +1,11 @@
 # React Typescript Template
 [Lighthouse CI]()
 
+https://feature-sliced.design/
+
 ## Navigation
 
 - Features
-
-## Motivation
-
-This is common problem in frontend world - there is no generalized template, it's more like example even if is, it's not enforcing a code style or structure. This template is to try to provide a solution, a code base to start from. It should be able to hold light, medium and somewhat large projects, offer structure and architecture, suggest some guidlines and articles to research more about frontend app building.
 
 ## Features
 
