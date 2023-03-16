@@ -1,7 +1,7 @@
 import _ from "lodash"
 import { HTMLAttributes } from "react"
 
-interface OuterLinkProps extends Exclude<HTMLAttributes<HTMLAnchorElement>, "rel" | "target" | "href"> {
+interface ExternalLinkProps extends Exclude<HTMLAttributes<HTMLAnchorElement>, "rel" | "target" | "href"> {
   /**
    * If `to` is not passed, it will be replaced with `children`.
    */
@@ -9,7 +9,7 @@ interface OuterLinkProps extends Exclude<HTMLAttributes<HTMLAnchorElement>, "rel
   noTarget?: boolean
 }
 
-function OuterLink(props: OuterLinkProps) {
+function ExternalLink(props: ExternalLinkProps) {
   const to = props.to ?? String(props.children)
   const protocol = findLackingProtocol(to)
 
@@ -22,7 +22,7 @@ function OuterLink(props: OuterLinkProps) {
 
 
 /**
- * @return null when already has proptocol
+ * @return null when already has protocol
  */
 function findLackingProtocol(uri: string): "mailto:" | "tel:" | "https://" | "" {
   if (uri.length === 0) return ""
@@ -40,4 +40,4 @@ function findLackingProtocol(uri: string): "mailto:" | "tel:" | "https://" | "" 
   return "https://"
 }
 
-export default OuterLink
+export default ExternalLink
