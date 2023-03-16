@@ -1,0 +1,19 @@
+@import "~assets/scss/bundle.scss";
+
+.search-field {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+
+	@include InputAppearance;
+}
+
+.search-field__clear {
+	color: $color-red;
+}
+
+.search-field__icon {
+	color: $color-blue;
+}
+
+.search-field__input {}

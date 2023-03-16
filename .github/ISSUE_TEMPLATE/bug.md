@@ -1,40 +1,48 @@
 ---
-name: Баг
-about: Поведение при котором что-то не работает, но приложение работает нормально
-title: Не работает ...
+name: Bug
+about: Behavior when something is not working, but the application works normally
+title: Does not work ...
 labels: bug
 assignees: ''
 
 ---
 
-## Описание бага
-Краткое и ясное описание бага.
+## Bug description
 
-### Как повторить
-Шаги чтобы повторить такое поведение:
-1. Идти сюда `...`
-2. Нажать на `....`
-3. Проскролить к `....`
-4. Наблюдать ошибку
+A brief and clear description of the bug.
 
-### Ожидаемое поведение
-Краткое и ясное описание поведение без бага.
+### How to repeat
 
-### Скриншоты
-Проложить скриншоты
+Steps to repeat such behavior:
 
-## Среда
+1. Go here `...`
+2. Click on `....`
+3. Scroll to `....`
+4. Observe the error
 
-### Desktop (заполните информацию ниже)
- - ОС: [например iOS]
- - Браузер: [например chrome, safari]
- - Версия: [например 22]
+### Expected behavior
 
-### Smartphone (заполните информацию ниже)
- - Устройство: [например iPhone6]
- - ОС: [например iOS]
- - Браузер: [например chrome, safari]
- - Версия: [например 22]
+A brief and clear description of behavior without a bug.
 
-### Дополнительная информация
-Любая другая информация на счёт этой ошибки.
+### Screenshots
+
+Drop screenshots
+
+## Environment
+
+### Desktop (fill in the information below)
+
+- OS: [for example iOS]
+- Browser: [for example chrome, safari]
+- Version: [for example 22]
+
+### Smartphone (fill in the information below)
+
+- Device: [for example iPhone6]
+- OS: [for example iOS]
+- Browser: [for example chrome, safari]
+- Version: [for example 22]
+
+### Additional information
+
+Any other information about this error.

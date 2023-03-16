@@ -1,0 +1,72 @@
+@import "~assets/scss/bundle.scss";
+
+.drop-down {
+	--translate: 0.25em;
+
+	position: absolute;
+	top: 100%;
+	left: 0;
+
+	display: grid;
+
+	max-height: 35vh;
+	overflow: auto;
+
+	min-width: 100%;
+	background: $color-gray-light;
+	border: 1px solid rgba($color-gray, 0.75);
+	border-radius: 0.5em;
+	box-shadow: 0px 0px 4px -5px rgba(39, 45, 58, 0.12);
+
+	color: $color-dark;
+
+	transform: translateY(var(--translate));
+	transition: 200ms ease opacity, 200ms ease transform;
+	z-index: 1;
+
+	&:not(&--expanded) {
+		--translate: 0em;
+
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&--upwards {
+		--translate: calc(-100% - 0.25em);
+
+		top: 0%;
+	}
+
+	&--upwards:not(&--expanded) {
+		--translate: calc(-100% - 0em);
+	}
+
+	&--small {}
+
+	&--big {
+		.drop-down__option {
+			padding: 0.75rem 1.25rem;
+		}
+	}
+}
+
+.drop-down__option {
+	padding: 0.5rem 1rem;
+
+	font-size: $font-size-h3;
+
+	transition: 100ms ease font-weight, 200ms ease background-color, 200ms ease color;
+	cursor: pointer;
+
+	&:not(:last-child) {
+		// border-bottom: 1px solid $color-gray;
+	}
+
+	&:hover {
+		background: rgba($color-gray, 0.35);
+	}
+
+	&--selected {
+		font-weight: 600;
+	}
+}

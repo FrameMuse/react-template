@@ -1,40 +1,48 @@
 ---
-name: Неожиданное поведение
-about: Что-то не отличается в поведении, но при этом работает исправно и нету ошибок
-title: Неожиданное поведение ...
+name: Unexpected behaviour
+about: Something is not different in behaviour, but it works correctly and there are no errors
+title: Unexpected behaviour ...
 labels: 'invalid, priority: 0'
 assignees: ''
 
 ---
 
-## Описание ошибки
-Краткое и ясное описание в чём была неожиданность.
+## Error description
 
-### Как повторить
-Шаги чтобы повторить такое поведение:
-1. Идти сюда `...`
-2. Нажать на `....`
-3. Проскролить к `....`
-4. Наблюдать ошибку
+A brief and clear description of the unexpectedness.
 
-### Ожидаемое поведение
-Краткое и ясное описание правильного поведения.
+### How to repeat
 
-### Скриншоты
-Проложить скриншоты
+Steps to repeat such behaviour:
 
-## Среда
+1. Go here `...`
+2. Click on `....`
+3. Scroll to `....`
+4. Observe the error
 
-### Desktop (заполните информацию ниже)
- - ОС: [например iOS]
- - Браузер: [например chrome, safari]
- - Версия: [например 22]
+### Expected behavior
 
-### Smartphone (заполните информацию ниже)
- - Устройство: [например iPhone6]
- - ОС: [например iOS]
- - Браузер: [например chrome, safari]
- - Версия: [например 22]
+A brief and clear description of the correct behavior.
 
-### Дополнительная информация
-Любая другая информация и контекст на счёт этой ошибки.
+### Screenshots
+
+Drop screenshots
+
+## Environment
+
+### Desktop (fill in the information below)
+
+- OS: [e.g. iOS]
+- Browser: [e.g. chrome, safari]
+- Version: [e.g. 22]
+
+### Smartphone (fill in the information below)
+
+- Device: [e.g. iPhone6]
+- OS: [e.g. iOS]
+- Browser: [e.g. chrome, safari]
+- Version: [e.g. 22]
+
+### Additional information
+
+Any other information and context about this error.

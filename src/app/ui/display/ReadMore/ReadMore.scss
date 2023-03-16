@@ -1,0 +1,13 @@
+@import "~assets/scss/bundle.scss";
+
+.read-more {
+	display: inline;
+
+	span[hidden] {
+		display: none;
+	}
+}
+
+.read-more__button {
+	font-weight: 600;
+}

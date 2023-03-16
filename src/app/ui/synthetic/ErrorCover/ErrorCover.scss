@@ -1,0 +1,27 @@
+@import "~assets/scss/bundle.scss";
+
+.error-cover {
+	min-height: 5em;
+
+	margin: 0 auto;
+	padding: 1.5em 5vw;
+
+	border-radius: 0.5em;
+
+	flex: 1 0;
+}
+
+.error-cover__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+
+	text-align: center;
+
+	font-size: $font-size-h5;
+
+	em {
+		font-weight: 700;
+	}
+}
