@@ -1,0 +1,3472 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Algo Academy API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-algo-academy-dev.up.railway.app",
+      "description": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "OAuth",
+      "description": "Endpoints authorization"
+    },
+    {
+      "name": "Admin",
+      "description": "Endpoints for admin"
+    },
+    {
+      "name": "User",
+      "description": "Endpoints for users"
+    },
+    {
+      "name": "Lesson",
+      "description": "Endpoints for lesson"
+    },
+    {
+      "name": "Chapter",
+      "description": "Endpoints for chapter"
+    },
+    {
+      "name": "Promo",
+      "description": "Endpoints for promo code"
+    },
+    {
+      "name": "Feedback",
+      "description": "Endpoints for feedbacks users"
+    },
+    {
+      "name": "Snippet",
+      "description": "Endpoints for snippets"
+    },
+    {
+      "name": "Subscription",
+      "description": "Endpoints for snippets"
+    },
+    {
+      "name": "Notes",
+      "description": "Endpoints for notes"
+    },
+    {
+      "name": "Judge0",
+      "description": "Endpoints for judge"
+    },
+    {
+      "name": "Stripe",
+      "description": "Endpoints for stripe"
+    }
+  ],
+  "paths": {
+    "/oauth2/google": {
+      "get": {
+        "tags": [
+          "OAuth"
+        ],
+        "security": [],
+        "summary": "google auth",
+        "description": "Authorization with google.",
+        "operationId": "googleAuth",
+        "responses": {
+          "200": {
+            "description": "Redicret to '/'"
+          },
+          "500": {
+            "description": "Redirect to '/login' "
+          }
+        }
+      }
+    },
+    "/oauth2/facebook": {
+      "get": {
+        "tags": [
+          "OAuth"
+        ],
+        "security": [],
+        "summary": "facebook auth",
+        "description": "Authorization with facebook.",
+        "operationId": "facebookAuth",
+        "responses": {
+          "200": {
+            "description": "Redicret to '/'"
+          },
+          "500": {
+            "description": "Redirect to '/login' "
+          }
+        }
+      }
+    },
+    "/oauth2/github": {
+      "get": {
+        "tags": [
+          "OAuth"
+        ],
+        "security": [],
+        "summary": "github auth",
+        "description": "Authorization with github.",
+        "operationId": "githubAuth",
+        "responses": {
+          "200": {
+            "description": "Redicret to '/'"
+          },
+          "500": {
+            "description": "Redirect to '/login' "
+          }
+        }
+      }
+    },
+    "/oauth2/logout": {
+      "post": {
+        "tags": [
+          "OAuth"
+        ],
+        "summary": "Logout from account",
+        "description": "Clear cookie info and redirect to '/'.",
+        "operationId": "logoutUser",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all users",
+        "description": "Get information about all users. This can only be done by an administrator.",
+        "operationId": "allUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User",
+          "Admin"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createUser",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "User",
+          "Admin"
+        ],
+        "summary": "Get user by ID",
+        "description": "Get information about user.",
+        "operationId": "getUserById",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User",
+          "Admin"
+        ],
+        "summary": "Update user by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "updateuserByIdUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of user need update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "User",
+          "Admin"
+        ],
+        "summary": "Delete user by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of user need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get yourself",
+        "description": "Get information about yourself. Only for authorized users.",
+        "operationId": "yourselfUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update yourself",
+        "description": "Update information about yourself. Only for authorized users.",
+        "operationId": "updateYourselfUser",
+        "requestBody": {
+          "description": "Update user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/me/avatar": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update yoursel avatar",
+        "description": "Update avatar. Only for authorized users.",
+        "operationId": "updateYourselfAvatar",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "avatar": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "string",
+                          "format": "binary",
+                          "example": "Binary('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQFBgcGBQUHBgQEBgkGBwgI...', 0)"
+                        },
+                        "contentType": {
+                          "type": "string",
+                          "example": "image/jpeg"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/me/progress": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update yoursel progress",
+        "description": "Update progress. Only for authorized users.",
+        "operationId": "updateYourselfProgress",
+        "requestBody": {
+          "description": "Update progress object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chapter_id",
+                  "chapter_name",
+                  "lesson_id",
+                  "status"
+                ],
+                "properties": {
+                  "chapter_id": {
+                    "type": "string",
+                    "example": "6383befbe25c834cdb762ae6"
+                  },
+                  "chapter_name": {
+                    "type": "string",
+                    "example": "Three"
+                  },
+                  "lesson_id": {
+                    "type": "string",
+                    "example": "6383befbe25c834cdb762ae6"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Completed",
+                    "enum": [
+                      "Not Completed",
+                      "Needs Review",
+                      "Completed"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/revoke-access/me": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Revoke access user",
+        "description": "Revoke access to your account. Only for authorized users.",
+        "operationId": "revokeUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/lessons": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get all lessons",
+        "description": "Get information about all lessons. Only for authorized users.",
+        "operationId": "allLessons",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LessonUserResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Create Lesson",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createLesson",
+        "requestBody": {
+          "description": "Created lesson object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonAdminResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/lessons/unused": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get unused lessons",
+        "description": "Learning lessons unused in chapter. This can only be done by an administrator.",
+        "operationId": "ununsedLessons",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LessonAdminResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/lessons/{id}": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "summary": "Get lesson by id",
+        "description": "Get information about lesson. Only for authorized users.",
+        "operationId": "lessonById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid body"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Update lesson by id",
+        "description": "Update information about lesson. This can only be done by an administrator.",
+        "operationId": "updateLesson",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update lesson object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Delete Lesson by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteLesson",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/lessons/admin/{id}": {
+      "get": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Get lesson by id for Admin",
+        "description": "Get information about lesson.",
+        "operationId": "lessonByIdForAdmin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonAdminResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid body"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/lessons/{id}/resources/{language_id}": {
+      "patch": {
+        "tags": [
+          "Lesson",
+          "Admin"
+        ],
+        "summary": "Update a lesson resources by language id",
+        "description": "Update information resources. This can only be done by an administrator.",
+        "operationId": "updateResourcesLesson",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of lesson to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language_id",
+            "in": "path",
+            "description": "ID of language to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update lesson object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "solution": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "tests": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "validation_func": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "default_code": {
+                    "nullable": true,
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Resource update success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/chapters": {
+      "get": {
+        "tags": [
+          "Chapter"
+        ],
+        "summary": "Get all chapters",
+        "description": "Get information about all chapters. Only for authorized users.",
+        "operationId": "allChapters",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChapterResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Chapter",
+          "Admin"
+        ],
+        "summary": "Create chapter",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createChapter",
+        "requestBody": {
+          "description": "Created chapter object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "order_number",
+                  "user_topic"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Trees"
+                  },
+                  "order_number": {
+                    "type": "number",
+                    "example": 9
+                  },
+                  "user_topic": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "list": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "5fva36hd873d761bd1c7ae4f"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChapterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/chapters/{id}": {
+      "get": {
+        "tags": [
+          "Chapter"
+        ],
+        "summary": "Get chapter by id",
+        "description": "Get information about chapter. Only for authorized users.",
+        "operationId": "chapterById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of chapter to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChapterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid body"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Chapter",
+          "Admin"
+        ],
+        "summary": "Update chapter by id",
+        "description": "Update information about chapter. This can only be done by an administrator.",
+        "operationId": "updateChapter",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of chapter to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update chapter object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Trees"
+                  },
+                  "order_number": {
+                    "type": "number",
+                    "example": 9
+                  },
+                  "user_topic": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "list": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "5fva36hd873d761bd1c7ae4f"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Chapter",
+          "Admin"
+        ],
+        "summary": "Delete Chapter by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteChapter",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of chapter need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/promo": {
+      "get": {
+        "tags": [
+          "Promo"
+        ],
+        "summary": "Get all promo",
+        "description": "This can only be done by an administrator.",
+        "operationId": "allPromo",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PromoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Promo",
+          "Admin"
+        ],
+        "summary": "Create promo",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createPromo",
+        "requestBody": {
+          "description": "Created promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Promo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/promo/check": {
+      "post": {
+        "tags": [
+          "Promo"
+        ],
+        "security": [],
+        "summary": "Check promo code",
+        "description": "",
+        "operationId": "checkPromo",
+        "requestBody": {
+          "description": "Check promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "promo success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromoCheckResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/promo/{id}": {
+      "get": {
+        "tags": [
+          "Promo"
+        ],
+        "summary": "Get promo by id",
+        "description": "Only for authorized users.",
+        "operationId": "promoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of promo to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Promo",
+          "Admin"
+        ],
+        "summary": "Update promo by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "updatePromo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of promo to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromoResponse"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Promo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Promo",
+          "Admin"
+        ],
+        "summary": "Delete Promo by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deletePromo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of promo need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Get all subscriptions",
+        "description": "This can only be done by an administrator.",
+        "operationId": "allSubscriptions",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SubscriptionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Subscription",
+          "Admin"
+        ],
+        "summary": "Create subscription",
+        "description": "This can only be done by an administrator.\nThe subscription validity period can be specified in the formats ('1y-2m-14d', '1y-2m', '1y-14d', '1y', '2m-14d', '2m', '14d'). y - amount of years, m - amount of months, d - amount of days",
+        "operationId": "createSubscription",
+        "requestBody": {
+          "description": "Created subscription object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Subscription"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/subscriptions/{id}": {
+      "get": {
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Get subscription by id",
+        "description": "Only for authorized users.",
+        "operationId": "subscriptionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Subscription",
+          "Admin"
+        ],
+        "summary": "Update subscription by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "updateSubscription",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update subscription object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Subscription"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Subscription",
+          "Admin"
+        ],
+        "summary": "Delete subscription by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteSubscription",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/snippets": {
+      "post": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Create snippet",
+        "description": "This can only be done by an administrator.",
+        "operationId": "createSnippet",
+        "requestBody": {
+          "description": "Created snippet object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snippet"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SnippetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "409": {
+            "description": "Conflict error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/snippets/language/{language}": {
+      "get": {
+        "tags": [
+          "Snippet"
+        ],
+        "summary": "Get array snippets by language",
+        "description": "Only for authorized users.",
+        "operationId": "snippetsByLanguageId",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "path",
+            "description": "language of snippets to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SnippetResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/snippets/{id}": {
+      "get": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Get snippet by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "snippetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of promo to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SnippetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Update snippet by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "updateSnippet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of snippet to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "uniqueItems": true
+                  },
+                  "language": {
+                    "type": "number"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "space_complex": {
+                    "type": "string"
+                  },
+                  "time_complex": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Snippet",
+          "Admin"
+        ],
+        "summary": "Delete Snippet by id",
+        "description": "This can only be done by an administrator.",
+        "operationId": "deleteSnippet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of Snippet need deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully. No content"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/feedbacks": {
+      "get": {
+        "tags": [
+          "Feedback",
+          "Admin"
+        ],
+        "summary": "Get all feedbacks",
+        "description": "This can only be done by an administrator.",
+        "operationId": "allFeedback",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "example": "Problem lesson #2"
+                      },
+                      "content": {
+                        "type": "string",
+                        "example": "error during lesson"
+                      },
+                      "user_id": {
+                        "type": "string",
+                        "example": "6387663011927596af93055b",
+                        "default": "Unauthorized user"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "Create feedback",
+        "description": "Sending feedback",
+        "operationId": "createFeedback",
+        "requestBody": {
+          "description": "Created feedback object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Feedback"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/notes/{lesson_id}": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Get user notes by lesson id",
+        "operationId": "notesByLessonId",
+        "parameters": [
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "description": "Lesson_id to return user notes",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Update user notes by lesson id",
+        "operationId": "updateNotesByLessonId",
+        "parameters": [
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "description": "ID of snippet to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notes"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/judge0/config_info": {
+      "get": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "Get Judge config",
+        "operationId": "judgeConfig",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JudgeConfig"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/statuses": {
+      "get": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "Get Judge statuses",
+        "operationId": "judgeStatuses",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JudgeStatuses"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/languages": {
+      "get": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "Get Judge languages",
+        "operationId": "judgeLanguages",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JudgeLanguages"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/languages/{id}": {
+      "get": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "Get languages by id",
+        "operationId": "languageJudgeById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of language to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JudgeLanguage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "404": {
+            "description": "Not found error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/judge0/compile": {
+      "post": {
+        "tags": [
+          "Judge0"
+        ],
+        "summary": "compile code",
+        "operationId": "compileCodeJudge0",
+        "requestBody": {
+          "description": "Created promo object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "chapter_id": {
+                    "type": "string",
+                    "example": "105061111241845470000"
+                  },
+                  "chapter_name": {
+                    "type": "string",
+                    "example": "Trees"
+                  },
+                  "lesson_id": {
+                    "type": "string",
+                    "example": "937569451241848356894"
+                  },
+                  "language_id": {
+                    "type": "integer",
+                    "example": "52"
+                  },
+                  "source_code": {
+                    "type": "string",
+                    "example": "var isPalindrome = function (s: string): boolean {// remove spaces and any special string s = s.replace(/[^A-Za-z0-9]/g, '').toLowerCase(); let left: number = 0; let right: number = s.length - 1; while (left <= right) { if (s[left] !== s[right]) return false; left++;right--;}return true;};"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JudgeResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/stripe/create-charge": {
+      "post": {
+        "tags": [
+          "Stripe"
+        ],
+        "summary": "plan payment",
+        "description": "Tariff plan payment. Only for authorized users.",
+        "operationId": "paymentStripe",
+        "requestBody": {
+          "description": "Payment data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stripe"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Create session Stripe. After success redirect to 'profile'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "403": {
+            "description": "Forbidden error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomAvatar": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "binary",
+            "example": "Binary('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQFBgcGBQUHBgQEBgkGBwgI...', 0)"
+          },
+          "contentType": {
+            "type": "string",
+            "example": "image/jpeg"
+          }
+        }
+      },
+      "Notes": {
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "NotesResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "required": [
+          "title",
+          "subtitle",
+          "cost",
+          "period",
+          "most_popular",
+          "descriptions"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "cost": {
+            "type": "number"
+          },
+          "period": {
+            "type": "string",
+            "example": "1y-2m-3d",
+            "description": " 1y-2m-3d (1 year, 2 months, 3 days), 1y-2m (1 year, 2 months), 1m-14d (1 month, 14 days)"
+          },
+          "most_popular": {
+            "type": "boolean",
+            "example": true
+          },
+          "descriptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SubscriptionResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "cost": {
+            "type": "number"
+          },
+          "period": {
+            "type": "string",
+            "example": "1y-2m-3d",
+            "description": " 1y-2m-3d (1 year, 2 months, 3 days), 1y-2m (1 year, 2 months),1m-14d (1 month, 14 days)"
+          },
+          "most_popular": {
+            "type": "boolean",
+            "example": true
+          },
+          "descriptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Snippet": {
+        "type": "object",
+        "required": [
+          "name",
+          "language",
+          "code",
+          "space_complex",
+          "time_complex"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "language": {
+            "type": "number"
+          },
+          "code": {
+            "type": "string"
+          },
+          "space_complex": {
+            "type": "string"
+          },
+          "time_complex": {
+            "type": "string"
+          }
+        }
+      },
+      "SnippetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "language": {
+            "type": "number"
+          },
+          "code": {
+            "type": "string"
+          },
+          "space_complex": {
+            "type": "string"
+          },
+          "time_complex": {
+            "type": "string"
+          }
+        }
+      },
+      "Feedback": {
+        "type": "object",
+        "required": [
+          "title",
+          "content"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Problem lesson #2"
+          },
+          "content": {
+            "type": "string",
+            "example": "error during lesson"
+          }
+        }
+      },
+      "Promo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 20
+          },
+          "discount_percent": {
+            "type": "number"
+          }
+        }
+      },
+      "PromoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 20
+          },
+          "discount_percent": {
+            "type": "number"
+          }
+        }
+      },
+      "PromoCheckResponse": {
+        "type": "object",
+        "properties": {
+          "discount_percent": {
+            "type": "number"
+          }
+        }
+      },
+      "Plan": {
+        "type": "object",
+        "properties": {
+          "receipt_id": {
+            "type": "string",
+            "example": "5fva36hd873d761bd1c7ae4f"
+          },
+          "purchase_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "plan_name": {
+            "type": "string",
+            "example": "Job Seeker"
+          },
+          "expiration_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "total_cost": {
+            "type": "string",
+            "example": "50"
+          }
+        }
+      },
+      "Stripe": {
+        "type": "object",
+        "required": [
+          "subscription_id"
+        ],
+        "properties": {
+          "subscription_id": {
+            "type": "string"
+          },
+          "promo_name": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateUser": {
+        "type": "object",
+        "required": [
+          "first_name",
+          "last_name",
+          "role",
+          "email"
+        ],
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Snow"
+          },
+          "role": {
+            "type": "string",
+            "example": "user",
+            "enum": [
+              "user",
+              "admin"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "example": "john.snow@gmail.com"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "id",
+          "first_name",
+          "last_name",
+          "rank",
+          "progress",
+          "history",
+          "role",
+          "email",
+          "providers",
+          "date_of_creation"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "635a518e488d761bd1c787f1"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Snow"
+          },
+          "display_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "John Snow"
+          },
+          "rank": {
+            "type": "number",
+            "example": 10
+          },
+          "current_plan": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Plan"
+              }
+            ]
+          },
+          "progress": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "chapter_id": {
+                  "type": "string",
+                  "example": "6383befbe25c834cdb762ae6"
+                },
+                "chapter_name": {
+                  "type": "string",
+                  "example": "Three"
+                },
+                "lessons": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "6383befbe25c834cdb762ae6"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Completed",
+                        "enum": [
+                          "Not Completed",
+                          "Needs Review",
+                          "Completed"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Plan"
+            }
+          },
+          "role": {
+            "type": "string",
+            "example": "user",
+            "enum": [
+              "user",
+              "admin"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "example": "john.snow@gmail.com"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Provider"
+            }
+          },
+          "avatar": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomAvatar"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "date_of_creation": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "635a518e488d761bd1c787f1"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Snow"
+          },
+          "display_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "John Snow"
+          },
+          "rank": {
+            "type": "number",
+            "example": 10
+          },
+          "current_plan": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Plan"
+              }
+            ]
+          },
+          "progress": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "chapter_id": {
+                  "type": "string",
+                  "example": "6383befbe25c834cdb762ae6"
+                },
+                "chapter_name": {
+                  "type": "string",
+                  "example": "Three"
+                },
+                "lessons": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "6383befbe25c834cdb762ae6"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Completed",
+                        "enum": [
+                          "Not Completed",
+                          "Needs Review",
+                          "Completed"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Plan"
+            }
+          },
+          "role": {
+            "type": "string",
+            "example": "user",
+            "enum": [
+              "user",
+              "admin"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "example": "john.snow@gmail.com"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Provider"
+            }
+          },
+          "avatar": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomAvatar"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "date_of_creation": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Lesson": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Common Patterns"
+          },
+          "type": {
+            "type": "string",
+            "example": "learning",
+            "enum": [
+              "learning",
+              "practice"
+            ]
+          },
+          "free": {
+            "type": "boolean",
+            "example": "false"
+          },
+          "statement": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "content": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "hints": {
+            "nullable": true,
+            "type": "string",
+            "example": "Coding Question"
+          },
+          "resources": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "properties": {
+                "solution": {
+                  "nullable": true,
+                  "type": "string",
+                  "example": "Coding Question"
+                },
+                "language": {
+                  "type": "number",
+                  "example": 45
+                },
+                "tests": {
+                  "type": "string"
+                },
+                "validation_func": {
+                  "description": "Should always return JSON.stringify(results). results is an array and contains the required fields of the { passed:boolean, description: string, ...any fields } ",
+                  "type": "string"
+                },
+                "default_code": {
+                  "type": "string",
+                  "example": "Coding Question"
+                }
+              }
+            }
+          },
+          "used_in": {
+            "nullable": true,
+            "type": "object",
+            "properties": {
+              "chapter_id": {
+                "type": "string"
+              },
+              "chapter_name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "LessonAdminResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Common Patterns"
+          },
+          "type": {
+            "type": "string",
+            "example": "learning",
+            "enum": [
+              "learning",
+              "practice"
+            ]
+          },
+          "free": {
+            "type": "boolean",
+            "example": "false"
+          },
+          "statement": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "content": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "hints": {
+            "nullable": true,
+            "type": "string",
+            "example": "Coding Question"
+          },
+          "resources": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "properties": {
+                "solution": {
+                  "nullable": true,
+                  "type": "string",
+                  "example": "Coding Question"
+                },
+                "language": {
+                  "type": "number",
+                  "example": 45
+                },
+                "tests": {
+                  "type": "string"
+                },
+                "validation_func": {
+                  "description": "Should always return JSON.stringify(results). results is an array and contains the required fields of the { passed:boolean, description: string, ...any fields } ",
+                  "type": "string"
+                },
+                "default_code": {
+                  "type": "string",
+                  "example": "Coding Question"
+                }
+              }
+            }
+          },
+          "used_in": {
+            "nullable": true,
+            "type": "object",
+            "properties": {
+              "chapter_id": {
+                "type": "string"
+              },
+              "chapter_name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "LessonUserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Common Patterns"
+          },
+          "type": {
+            "type": "string",
+            "example": "learning",
+            "enum": [
+              "learning",
+              "practice"
+            ]
+          },
+          "free": {
+            "type": "boolean",
+            "example": "false"
+          },
+          "statement": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "content": {
+            "nullable": true,
+            "type": "string",
+            "example": "Article or Coding Question"
+          },
+          "hints": {
+            "nullable": true,
+            "type": "string",
+            "example": "Coding Question"
+          },
+          "resources": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "properties": {
+                "solution": {
+                  "nullable": true,
+                  "type": "string",
+                  "example": "Coding Question"
+                },
+                "language": {
+                  "type": "number",
+                  "example": 45
+                },
+                "tests": {
+                  "type": "string"
+                },
+                "default_code": {
+                  "type": "string",
+                  "example": "Coding Question"
+                }
+              }
+            }
+          },
+          "used_in": {
+            "nullable": true,
+            "type": "object",
+            "properties": {
+              "chapter_id": {
+                "type": "string"
+              },
+              "chapter_name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Chapter": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Trees"
+          },
+          "order_number": {
+            "type": "number",
+            "example": 9
+          },
+          "user_topic": {
+            "type": "boolean",
+            "example": true
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "5fva36hd873d761bd1c7ae4f"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "learning"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Common Patterns"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ChapterResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Trees"
+          },
+          "order_number": {
+            "type": "number",
+            "example": 9
+          },
+          "user_topic": {
+            "type": "boolean",
+            "example": true
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "5fva36hd873d761bd1c7ae4f"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "learning"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Common Patterns"
+                },
+                "free": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "Provider": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "google"
+          },
+          "provider": {
+            "type": "string",
+            "example": "105061111241845470000"
+          }
+        }
+      },
+      "JudgeConfig": {
+        "type": "object",
+        "properties": {
+          "maintenance_mode": {
+            "type": "boolean",
+            "example": false
+          },
+          "enable_wait_result": {
+            "type": "boolean",
+            "example": false
+          },
+          "enable_compiler_options": {
+            "type": "boolean",
+            "example": true
+          },
+          "allowed_languages_for_compile_options": {
+            "type": "array",
+            "example": []
+          },
+          "enable_command_line_arguments": {
+            "type": "boolean",
+            "example": true
+          },
+          "enable_submission_delete": {
+            "type": "boolean",
+            "example": false
+          },
+          "enable_callbacks": {
+            "type": "boolean",
+            "example": true
+          },
+          "callbacks_max_tries": {
+            "type": "number",
+            "example": 3
+          },
+          "callbacks_timeout": {
+            "type": "number",
+            "example": 5
+          },
+          "enable_additional_files": {
+            "type": "boolean",
+            "example": true
+          },
+          "max_queue_size": {
+            "type": "number",
+            "example": 10000
+          },
+          "cpu_time_limit": {
+            "type": "number",
+            "example": 5
+          },
+          "max_cpu_time_limit": {
+            "type": "number",
+            "example": 15
+          },
+          "cpu_extra_time": {
+            "type": "number",
+            "example": 1
+          },
+          "max_cpu_extra_time": {
+            "type": "number",
+            "example": 5
+          },
+          "wall_time_limit": {
+            "type": "number",
+            "example": 10
+          },
+          "max_wall_time_limit": {
+            "type": "number",
+            "example": 20
+          },
+          "memory_limit": {
+            "type": "number",
+            "example": 128000
+          },
+          "max_memory_limit": {
+            "type": "number",
+            "example": 512000
+          },
+          "stack_limit": {
+            "type": "number",
+            "example": 64000
+          },
+          "max_stack_limit": {
+            "type": "number",
+            "example": 128000
+          },
+          "max_processes_and_or_threads": {
+            "type": "number",
+            "example": 60
+          },
+          "max_max_processes_and_or_threads": {
+            "type": "number",
+            "example": 120
+          },
+          "enable_per_process_and_thread_time_limit": {
+            "type": "boolean",
+            "example": false
+          },
+          "allow_enable_per_process_and_thread_time_limit": {
+            "type": "boolean",
+            "example": true
+          },
+          "enable_per_process_and_thread_memory_limit": {
+            "type": "boolean",
+            "example": false
+          },
+          "allow_enable_per_process_and_thread_memory_limit": {
+            "type": "boolean",
+            "example": true
+          },
+          "max_file_size": {
+            "type": "number",
+            "example": 1024
+          },
+          "max_max_file_size": {
+            "type": "number",
+            "example": 20480
+          },
+          "number_of_runs": {
+            "type": "number",
+            "example": 1
+          },
+          "max_number_of_runs": {
+            "type": "number",
+            "example": 20
+          },
+          "redirect_stderr_to_stdout": {
+            "type": "boolean",
+            "example": false
+          },
+          "max_extract_size": {
+            "type": "number",
+            "example": 10240
+          },
+          "enable_batched_submissions": {
+            "type": "boolean",
+            "example": true
+          },
+          "max_submission_batch_size": {
+            "type": "number",
+            "example": 20
+          },
+          "submission_cache_duration": {
+            "type": "number",
+            "example": 1
+          },
+          "use_docs_as_homepage": {
+            "type": "boolean",
+            "example": true
+          },
+          "allow_enable_network": {
+            "type": "boolean",
+            "example": false
+          },
+          "enable_network": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "JudgeStatuses": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 3
+          },
+          "description": {
+            "type": "string",
+            "example": "Accepted"
+          }
+        }
+      },
+      "JudgeLanguages": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 63
+          },
+          "name": {
+            "type": "string",
+            "example": "JavaScript (Node.js 12.14.0)"
+          }
+        }
+      },
+      "JudgeLanguage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 63
+          },
+          "name": {
+            "type": "string",
+            "example": "JavaScript (Node.js 12.14.0)"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "example": false
+          },
+          "source_file": {
+            "type": "string",
+            "example": "script.js"
+          },
+          "compile_cmd": {
+            "type": "string",
+            "example": null
+          },
+          "run_cmd": {
+            "type": "string",
+            "example": "/usr/local/node-12.14.0/bin/node script.js"
+          }
+        }
+      },
+      "JudgeResult": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "nullable": true,
+            "type": "string",
+            "example": "0.007"
+          },
+          "memory": {
+            "nullable": true,
+            "type": "number",
+            "example": 1332
+          },
+          "compile_output": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "properties": {
+                "passed": {
+                  "type": "boolean"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "expected": {
+                  "type": "string"
+                },
+                "userAnswer": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 3
+              },
+              "description": {
+                "type": "string",
+                "example": "Accepted"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "sessionId"
+      }
+    }
+  },
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ]
+}

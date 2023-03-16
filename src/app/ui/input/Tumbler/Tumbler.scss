@@ -1,0 +1,25 @@
+@import "~assets/scss/bundle.scss";
+
+.tumbler {
+  display: flex;
+  align-items: center;
+}
+
+.tumbler-shift {
+  padding: 0.3em 0.4em;
+  width: 3.75em;
+  border-radius: 10em;
+  cursor: pointer;
+}
+
+.tumbler-shift__circle {
+  margin-left: 0%;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 100%;
+  transition: margin-left 200ms;
+
+  &--right {
+    margin-left: 50%;
+  }
+}

@@ -13,8 +13,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.log(errorInfo)
+    console.error(error, errorInfo)
+
     this.setState({ error, errorInfo })
+  }
+
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+    if (this.props.deps?.toString() !== prevProps.deps?.toString()) {
+      this.reset()
+    }
   }
 
   reset = () => {

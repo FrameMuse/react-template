@@ -1,0 +1,33 @@
+@import "~assets/scss/bundle.scss";
+
+.headings {
+	display: grid;
+	gap: 1em;
+
+	h1,
+	h2,
+	h3,
+	p {
+		margin: unset;
+	}
+
+	p {
+		font-size: $font-size-h3;
+		line-height: 1.25;
+
+		opacity: 0.75;
+	}
+
+	h1+p,
+	h2+p {
+		font-size: $font-size-h2;
+	}
+
+	&--white {
+		color: white;
+
+		p {
+			font-weight: 300;
+		}
+	}
+}

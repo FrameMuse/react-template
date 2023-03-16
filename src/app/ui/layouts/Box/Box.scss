@@ -1,0 +1,42 @@
+@import "~assets/scss/bundle.scss";
+
+.box {
+	position: relative;
+
+	display: grid;
+	gap: 1.5em;
+
+	justify-items: flex-start;
+
+	padding: 1.5em 1.75em;
+	background: white;
+	border-radius: 0.75em;
+
+	&>h1,
+	&>h2,
+	&>h3,
+	&>p {
+		margin: unset;
+	}
+
+	&>:first-child {
+		margin-top: unset;
+	}
+
+	&>h1:first-child,
+	&>h2:first-child {
+		color: $color-blue;
+
+		font-weight: 700;
+	}
+
+
+	&--gray {
+		background: $color-gray-light;
+	}
+
+	@include Mobile {
+		gap: 1.5em;
+		padding: 1.5em;
+	}
+}
