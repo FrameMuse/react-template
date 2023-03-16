@@ -1,3 +1,5 @@
+[`README.md` is in development]
+
 # React Typescript Template
 [Lighthouse CI]()
 
