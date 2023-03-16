@@ -1,23 +1,28 @@
 ---
-name: Новведение
-about: Запрос на улучшение или измение чего-то либо добавление новый фичи
-title: Новведение в\для ...
+name: Enhancement
+about: Suggest an enhancement to this project
+title: Enhancement for ...
 labels: enhancement, proposal
 assignees: ''
 
 ---
 
-## Описание новведения
-#### Это новведение относится к какой-то проблеме? Описать
-Краткое и ясное описание проблемы. Например: Да, вот не очень сделан переход...
+## Enhancement description
 
-## Решения
+### Is your enhancement related to a problem? Please describe
 
-#### Описать возможное решение
-Краткое и ясное описание того как оно должно работать.
+A clear and concise description of what the problem is. E.g. I'm always frustrated when...
 
-#### Описать альтернативы, которые были обдуманы
-Краткое и ясное описание альтернативных решений или предложений которые были обдуманы.
+## Solutions
 
-## Дополнительная информация
-Любая другая информация или скриншоты в контексте этого новведения
+### Describe the solution you'd like
+
+A clear and concise description of what you want to happen.
+
+#### Describe alternatives you've considered
+
+A clear and concise description of any alternative solutions or features you've considered.
+
+## Additional context
+
+Add any other context or screenshots about the feature request here.

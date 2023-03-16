@@ -1,40 +1,48 @@
 ---
-name: Отчёт об ошибке
-about: Отчёт об ошибке, при котором приложение крашится (фатальная ошибка)
-title: Произошла ошибка в ...
+name: Bug Report
+about: Create a report to help us improve
+title: Error in ...
 labels: bug, error report
 assignees: ''
 
 ---
 
-## Описание ошибки
-Краткое и ясное описание ошибки.
+## Description
 
-### Как повторить
-Шаги чтобы повторить такое поведение:
-1. Идти сюда `...`
-2. Нажать на `....`
-3. Проскролить к `....`
-4. Наблюдать ошибку
+A clear and concise description of what the bug is.
 
-### Ожидаемое поведение
-Краткое и ясное описание поведение без ошибки.
+### How to reproduce
 
-### Скриншоты
-Проложить скриншоты
+Steps to reproduce the behavior:
 
-## Среда
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-### Desktop (заполните информацию ниже)
- - ОС: [например iOS]
- - Браузер: [например chrome, safari]
- - Версия: [например 22]
+### Expected behavior
 
-### Smartphone (заполните информацию ниже)
- - Устройство: [например iPhone6]
- - ОС: [например iOS]
- - Браузер: [например chrome, safari]
- - Версия: [например 22]
+A clear and concise description of what you expected to happen.
 
-### Дополнительная информация
-Любая другая информация на счёт этой ошибки.
+### Screenshots
+
+If applicable, add screenshots to help explain your problem.
+
+## Environment
+
+### Desktop (please complete the following information)
+
+- OS: [e.g. iOS]
+- Browser [e.g. chrome, safari]
+- Version [e.g. 22]
+
+### Smartphone (please complete the following information)
+
+- Device: [e.g. iPhone6]
+- OS: [e.g. iOS]
+- Browser [e.g. chrome, safari]
+- Version [e.g. 22]
+
+### Additional context
+
+Add any other context about the problem here.
